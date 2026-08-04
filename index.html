@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OMODA 04 Semarang | Pre-Order & Info Harga — OMODA Semarang</title>
+<meta name="description" content="Informasi OMODA 04 EV untuk wilayah Semarang. Jangkauan 553 km NEDC, AI Smart Cockpit, Cyber Mecha Design. Konsultasi harga dan pre-order langsung via WhatsApp.">
+<link rel="canonical" href="https://DOMAIN-ANDA.com/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="OMODA 04 Semarang | Pre-Order & Info Harga">
+<meta property="og:description" content="Jangkauan 553 km NEDC, AI Smart Cockpit, Cyber Mecha Design. Konsultasi langsung via WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/og-omoda-04.jpg">
+
+<!-- Font display. Ganti/hapus kalau mau 100% tanpa request eksternal. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. TOKEN
+   ============================================================ */
+:root{
+  --ink:#000;
+  --steel:#111;
+  --paper:#fff;
+  --mist:#f7f2f2;          /* putih kemerahan di section lineup */
+  --silver:#b4b4b4;
+  --line:#d8d2d2;
+  --midnight:#061024;      /* section dealer */
+  --accent:#e4002b;        /* merah OMODA */
+  --wa:#25d366;
+
+  --display:'Chakra Petch','Segoe UI',system-ui,sans-serif;
+  --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+
+  --pad:20px;
+  --max:1200px;
+  --header-h:64px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.55;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--pad)}
+
+/* ============================================================
+   2. PLACEHOLDER GAMBAR
+   Ganti <div class="ph"> jadi <img src="..."> kalau aset sudah ada.
+   ============================================================ */
+.ph{
+  position:relative;
+  width:100%;
+  background:
+    repeating-linear-gradient(45deg,#e9e9e9 0 10px,#f3f3f3 10px 20px);
+  border:1px dashed #b9b9b9;
+  display:grid;place-items:center;
+  color:#8a8a8a;
+  font:600 11px/1.4 var(--body);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  text-align:center;
+  padding:12px;
+}
+.ph--dark{
+  background:repeating-linear-gradient(45deg,#161616 0 10px,#1f1f1f 10px 20px);
+  border-color:#3a3a3a;color:#777;
+}
+.ph::after{content:attr(data-name)}
+.ph-16-9{aspect-ratio:16/9}
+.ph-4-3{aspect-ratio:4/3}
+.ph-1-1{aspect-ratio:1/1}
+.ph-hero{aspect-ratio:3/4}
+@media(min-width:768px){.ph-hero{aspect-ratio:16/9}}
+
+/* ============================================================
+   3. HEADER
+   ============================================================ */
+.header{
+  position:fixed;inset:0 0 auto 0;z-index:60;
+  height:var(--header-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding-inline:var(--pad);
+  background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,0));
+  transition:background .3s ease;
+}
+.header.is-solid{background:var(--ink)}
+.logo{
+  font-family:var(--display);
+  font-weight:700;font-size:22px;letter-spacing:.22em;
+  color:var(--paper);
+}
+.burger{
+  width:40px;height:40px;
+  display:grid;place-content:center;gap:6px;
+}
+.burger span{
+  display:block;width:26px;height:2px;background:var(--paper);
+  transition:transform .3s ease,opacity .2s ease;
+}
+.nav-open .burger span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.nav-open .burger span:nth-child(2){opacity:0}
+.nav-open .burger span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* ============================================================
+   4. MENU OVERLAY
+   ============================================================ */
+.nav{
+  position:fixed;inset:0;z-index:55;
+  background:var(--ink);color:var(--paper);
+  padding:calc(var(--header-h) + 24px) var(--pad) 48px;
+  overflow-y:auto;
+  opacity:0;visibility:hidden;transform:translateY(-12px);
+  transition:opacity .28s ease,transform .28s ease,visibility .28s;
+}
+.nav-open .nav{opacity:1;visibility:visible;transform:none}
+.nav__mark{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(34px,11vw,64px);letter-spacing:.16em;
+  text-align:center;margin:8px 0 28px;
+}
+.nav__list{list-style:none;border-top:1px solid #fff}
+.nav__list>li{border-bottom:1px solid #fff}
+.nav__link,.nav__sum{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 2px;
+  font-family:var(--display);font-weight:600;
+  font-size:22px;letter-spacing:.06em;text-transform:uppercase;
+}
+.nav__sum{cursor:pointer;list-style:none}
+.nav__sum::-webkit-details-marker{display:none}
+.nav__sum::after{
+  content:"";width:10px;height:10px;
+  border-right:2px solid #fff;border-bottom:2px solid #fff;
+  transform:rotate(45deg) translate(-3px,-3px);
+  transition:transform .25s ease;
+}
+details[open] .nav__sum::after{transform:rotate(225deg) translate(-2px,-2px)}
+.nav__sub{list-style:none;padding:0 0 16px 12px}
+.nav__sub a{
+  display:block;padding:10px 0;color:var(--silver);
+  font-size:15px;letter-spacing:.04em;
+}
+.nav__sub a:hover{color:#fff}
+.nav__foot{
+  margin-top:40px;text-align:center;color:var(--silver);
+  font-size:14px;line-height:1.9;
+}
+.nav__foot a{display:block;margin-top:14px;color:#fff}
+
+/* ============================================================
+   5. HERO
+   ============================================================ */
+.hero{position:relative;background:var(--ink);color:var(--paper)}
+.hero__media{position:relative}
+.hero__media .ph{border:0}
+/* Hero memakai dua sumber lewat <picture>, masing-masing sudah sesuai
+   rasio kotaknya, jadi tidak ada bagian foto yang terpotong:
+     ponsel  -> hero-omoda-04.jpeg      1200x1600 (3:4)
+     desktop -> hero-banner-desktop.webp 1512x851 (16:9)
+   height:auto WAJIB — atribut height di <img> dipakai browser sebagai tinggi
+   CSS, dan selama tinggi bukan auto, aspect-ratio diabaikan sehingga foto
+   tampil setinggi ukuran aslinya. */
+.hero__img{
+  width:100%;
+  height:auto;
+  aspect-ratio:3/4;
+  object-fit:cover;
+}
+@media(min-width:768px){
+  .hero__img{aspect-ratio:16/9}
+}
+.hero__copy{
+  position:absolute;inset:auto 0 0 0;
+  padding:0 var(--pad) 40px;
+  text-align:center;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.88) 100%);
+}
+.hero__welcome{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(22px,6vw,38px);letter-spacing:.04em;
+}
+.hero__tag{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-top:10px;
+  font-family:var(--display);font-style:italic;font-weight:700;
+  font-size:clamp(20px,5.6vw,34px);letter-spacing:.08em;
+}
+.hero__bolt{color:var(--accent);font-size:1.1em;font-style:normal}
+.hero__cta{margin-top:26px}
+
+/* ============================================================
+   6. BUTTON
+   ============================================================ */
+.btn{
+  display:block;width:100%;
+  padding:17px 22px;
+  font-family:var(--display);font-weight:700;
+  font-size:15px;letter-spacing:.12em;text-transform:uppercase;
+  text-align:center;
+  border:1px solid transparent;
+  transition:background .22s ease,color .22s ease,border-color .22s ease;
+}
+.btn--light{background:var(--paper);color:var(--ink)}
+.btn--light:hover{background:var(--accent);color:var(--paper)}
+.btn--dark{background:var(--ink);color:var(--paper)}
+.btn--dark:hover{background:var(--accent)}
+.btn--ghost{border-color:var(--ink);color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--paper)}
+@media(min-width:768px){
+  .btn{display:inline-block;width:auto;min-width:300px}
+}
+
+/* ============================================================
+   7. LINEUP
+   ============================================================ */
+.lineup{background:var(--mist);padding:56px 0 64px;text-align:center}
+.sec-title{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(30px,8.5vw,56px);letter-spacing:.02em;
+  text-transform:uppercase;
+}
+.lineup__tabs{
+  margin:34px 0 8px;
+  display:flex;justify-content:center;gap:28px;
+  border-bottom:0;
+}
+.lineup__tab{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(22px,6vw,34px);letter-spacing:.08em;
+  padding-bottom:14px;
+  border-bottom:3px solid transparent;
+  color:#9a9090;
+}
+.lineup__tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.lineup__rule{height:1px;background:var(--line);margin-bottom:34px}
+
+.car__media{margin-bottom:22px}
+.car__name{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:.05em}
+.car__from{margin-top:12px;font-size:15px;color:#4a4a4a}
+.car__price{
+  margin-top:4px;
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(24px,6.5vw,34px);letter-spacing:.02em;
+}
+.car__note{margin-top:6px;font-size:12px;color:#7c7676}
+.car__divider{height:1px;background:var(--line);margin:26px 0}
+.specs{text-align:left;max-width:420px;margin:0 auto}
+.specs h3{
+  font-family:var(--display);font-size:17px;font-weight:700;
+  letter-spacing:.04em;margin-bottom:10px;
+}
+.specs ul{list-style:none}
+.specs li{
+  position:relative;padding:8px 0 8px 22px;font-size:16px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.specs li::before{
+  content:"";position:absolute;left:4px;top:17px;
+  width:7px;height:7px;background:var(--accent);
+  transform:rotate(45deg);
+}
+.car__actions{margin-top:28px;display:grid;gap:12px;justify-items:center}
+
+/* ============================================================
+   8. OUR STORY
+   ============================================================ */
+.story{background:var(--steel);color:var(--paper);text-align:center}
+.story__body{padding:44px var(--pad) 56px}
+.story__title{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(30px,8.5vw,52px);letter-spacing:.03em;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.story__text{
+  max-width:660px;margin:0 auto 28px;
+  font-size:16px;color:#e2e2e2;
+}
+
+/* ============================================================
+   9. UPDATE / PROMO
+   ============================================================ */
+.update{padding:56px 0 60px;background:var(--paper)}
+.update .sec-title{text-align:center;margin-bottom:32px}
+.cards{display:grid;gap:26px}
+@media(min-width:768px){.cards{grid-template-columns:repeat(3,1fr)}}
+.card__media{margin-bottom:14px}
+.card h3{
+  font-family:var(--display);font-size:19px;font-weight:700;
+  letter-spacing:.03em;margin-bottom:6px;
+}
+.card p{font-size:15px;color:#565656;margin-bottom:12px}
+.card a{
+  font-family:var(--display);font-weight:700;font-size:13px;
+  letter-spacing:.12em;text-transform:uppercase;
+  border-bottom:2px solid var(--accent);padding-bottom:3px;
+}
+
+/* ============================================================
+   10. DEALER
+   ============================================================ */
+.dealer{
+  position:relative;background:var(--midnight);color:var(--paper);
+  padding:52px 0 56px;
+}
+.dealer__title{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(34px,10vw,64px);line-height:1.05;
+  letter-spacing:.01em;text-transform:uppercase;
+}
+.dealer__text{margin-top:16px;font-size:16px;color:#cfd8e6;max-width:560px}
+.dealer__media{margin:26px 0 30px}
+.dealer__list{
+  list-style:none;margin:0 0 30px;font-size:15px;color:#cfd8e6;
+}
+.dealer__list li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.dealer__list strong{display:block;color:#fff;font-weight:600;letter-spacing:.02em}
+
+/* ============================================================
+   11. ACTION LIST (PRE-ORDER / FIND A DEALER)
+   ============================================================ */
+.actions{background:var(--mist);padding:20px 0 8px}
+.action{
+  display:block;text-align:center;
+  padding:44px 0 40px;
+  border-bottom:1px solid var(--line);
+}
+.action:last-child{border-bottom:0}
+.action__icon{
+  width:44px;height:36px;margin:0 auto 22px;
+  border:3px solid var(--ink);
+  position:relative;
+}
+.action__icon::before{
+  content:"";position:absolute;left:8px;bottom:8px;
+  width:20px;height:12px;
+  border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+}
+.action__icon::after{
+  content:"";position:absolute;left:6px;bottom:-13px;
+  border:7px solid transparent;border-top-color:var(--ink);
+}
+.action__title{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(28px,8vw,46px);letter-spacing:.02em;
+  text-transform:uppercase;
+}
+.action__sub{margin-top:10px;font-size:16px;color:#4a4a4a}
+
+/* ============================================================
+   12. FOOTER
+   ============================================================ */
+.footer{
+  background:var(--ink);color:var(--silver);
+  padding:44px var(--pad) calc(96px + env(safe-area-inset-bottom));
+  text-align:center;font-size:14px;line-height:1.9;
+}
+.footer__mark{
+  font-family:var(--display);font-weight:700;
+  font-size:26px;letter-spacing:.2em;color:#fff;margin-bottom:18px;
+}
+.footer__links{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;
+  margin:18px 0;
+}
+.footer__links a:hover{color:#fff}
+.footer small{display:block;margin-top:14px;color:#6d6d6d;font-size:12px}
+
+/* ============================================================
+   13. FLOATING WHATSAPP + BANNER
+   ============================================================ */
+.fab{
+  position:fixed;z-index:70;
+  right:16px;bottom:calc(16px + env(safe-area-inset-bottom));
+  width:60px;height:60px;border-radius:50%;
+  background:var(--ink);border:2px solid rgba(228,0,43,.55);
+  display:grid;place-items:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+  transition:transform .2s ease;
+}
+.fab:hover{transform:scale(1.06)}
+.fab svg{width:30px;height:30px;fill:#fff}
+
+.promo{
+  position:fixed;z-index:69;
+  left:16px;bottom:calc(16px + env(safe-area-inset-bottom));
+  width:170px;
+  background:var(--ink);color:#fff;
+  border:1px solid #2a2a2a;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+}
+.promo[hidden]{display:none}
+.promo__close{
+  position:absolute;top:4px;right:4px;
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(0,0,0,.6);color:#fff;font-size:15px;line-height:1;
+}
+/* Poster ditampilkan utuh: teks promonya menyatu di dalam gambar,
+   jadi memaksanya ke kotak 4:3 akan memotong tulisan. */
+.promo img{display:block;width:100%;height:auto}
+.promo__cta{
+  display:block;padding:10px 6px;text-align:center;
+  font-family:var(--display);font-weight:700;font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+@media(max-width:400px){.promo{width:140px}}
+
+/* ============================================================
+   14. LOGO GAMBAR
+   Wordmark putih (logo_dark.png = logo UNTUK latar gelap).
+   Dipakai di header, menu, dan footer yang semuanya berlatar gelap.
+   ============================================================ */
+.logo img{display:block;height:18px;width:auto}
+.nav__mark img{display:block;height:34px;width:auto;margin:0 auto}
+.footer__mark img{display:block;height:22px;width:auto;margin:0 auto}
+@media(min-width:768px){
+  .logo img{height:22px}
+  .nav__mark img{height:44px}
+}
+
+/* Peta dealer: iframe bawaan Google berukuran kaku 600x450.
+   Dibuat mengikuti lebar wadah dgn rasio 16:9 supaya tidak meluber
+   di ponsel dan tidak menyisakan ruang kosong di desktop. */
+.dealer__map{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  border:0;
+}
+
+/* Foto mobil di Lineup: gambar potongan (cutout) 1842x1038. Sengaja TIDAK
+   diberi aspect-ratio maupun object-fit — dibiarkan tampil pada rasio
+   aslinya supaya bemper depan dan buritan tidak terpotong sedikit pun.
+   Latarnya putih, jadi disamakan dgn latar section ini agar menyatu. */
+.car__img{
+  width:100%;
+  height:auto;
+  background:var(--mist);
+}
+/* Foto story sudah 16:9 persis seperti kotaknya -> tidak terpotong. */
+.story__img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+
+/* Tombol media sosial di footer. */
+.footer__social{
+  display:flex;justify-content:center;gap:12px;
+  margin:20px 0 4px;
+}
+.footer__social a{
+  display:grid;place-items:center;
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid #3a3a3a;color:var(--silver);
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.footer__social a:hover{background:#fff;color:var(--ink);border-color:#fff}
+.footer__social svg{width:20px;height:20px;fill:currentColor}
+
+/* ============================================================
+   15. POP-UP PROMO
+   Gambar promo melebar (panjang.jpeg). Muncul sekali per pengunjung,
+   lalu diingat lewat localStorage. Tanpa JS: tidak muncul sama sekali,
+   jadi tidak pernah menghalangi isi halaman.
+   ============================================================ */
+.pop{
+  position:fixed;inset:0;z-index:80;
+  display:grid;place-items:center;
+  padding:16px;
+}
+.pop[hidden]{display:none}
+.pop__veil{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.72);
+  opacity:0;transition:opacity .28s ease;
+}
+.pop.is-open .pop__veil{opacity:1}
+.pop__box{
+  position:relative;z-index:1;
+  width:min(420px,100%);
+  max-height:calc(100dvh - 32px);
+  overflow:auto;
+  background:var(--ink);
+  border:1px solid #2a2a2a;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  transform:translateY(10px) scale(.985);opacity:0;
+  transition:transform .28s ease,opacity .28s ease;
+}
+.pop.is-open .pop__box{transform:none;opacity:1}
+.pop__img{display:block;width:100%;height:auto}
+.pop__close{
+  position:absolute;top:8px;right:8px;z-index:2;
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(0,0,0,.62);color:#fff;
+  font-size:20px;line-height:1;
+  display:grid;place-content:center;
+  backdrop-filter:blur(4px);
+}
+.pop__close:hover{background:rgba(0,0,0,.85)}
+.pop__cta{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:15px 12px;
+  background:var(--wa);color:#04220f;
+  font-family:var(--display);font-weight:700;font-size:15px;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+.pop__cta:hover{filter:brightness(1.06)}
+@media(prefers-reduced-motion:reduce){
+  .pop__veil,.pop__box{transition:none}
+}
+
+/* Kartu update: poster tegak ditampilkan UTUH (tidak dipotong),
+   karena teksnya menyatu di dalam gambar. */
+.card__media img{display:block;width:100%;height:auto}
+
+/* ============================================================
+   16. DESKTOP TWEAK
+   ============================================================ */
+@media(min-width:768px){
+  :root{--pad:40px;--header-h:76px}
+  .hero__copy{padding-bottom:64px}
+  .lineup{padding:80px 0 90px}
+  .story__body{padding:64px var(--pad) 76px}
+  .dealer{padding:80px 0 86px}
+  .action{padding:60px 0 56px}
+  .nav__list{max-width:640px;margin:0 auto}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header" id="header">
+  <a href="#top" class="logo" aria-label="OMODA JAECOO beranda"><img src="logo_dark.png" alt="OMODA | JAECOO"></a>
+  <button class="burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ===================== MENU ===================== -->
+<nav class="nav" id="nav" aria-label="Menu utama">
+  <div class="nav__mark"><img src="logo_dark.png" alt="OMODA | JAECOO"></div>
+  <ul class="nav__list">
+    <li>
+      <details>
+        <summary class="nav__sum">Model</summary>
+        <ul class="nav__sub">
+          <li><a href="#lineup">OMODA 04 EV</a></li>
+          <li><a href="#lineup">Spesifikasi lengkap</a></li>
+        </ul>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary class="nav__sum">Tentang Kami</summary>
+        <ul class="nav__sub">
+          <li><a href="#story">Cerita OMODA</a></li>
+          <li><a href="#update">Berita &amp; Promo</a></li>
+        </ul>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary class="nav__sum">Beli Mobil</summary>
+        <ul class="nav__sub">
+          <li><a href="#" data-wa="Halo, saya mau tanya simulasi kredit OMODA 04 di Semarang.">Simulasi kredit</a></li>
+          <li><a href="#" data-wa="Halo, saya mau jadwalkan test drive OMODA 04 di Semarang.">Test drive</a></li>
+          <li><a href="#" data-wa="Halo, saya mau tanya penawaran harga OMODA 04 Semarang.">Penawaran harga</a></li>
+        </ul>
+      </details>
+    </li>
+    <li><a class="nav__link" href="#" data-wa="Halo, saya tertarik pre-order OMODA 04 di Semarang.">Pre-Order</a></li>
+    <li><a class="nav__link" href="#dealer">Dealer Semarang</a></li>
+  </ul>
+  <div class="nav__foot">
+    OMODA | JAECOO Semarang<br>
+    Jl. Madukoro Raya No. 45, Tawangsari, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50144
+    <a href="#" data-wa="Halo, saya mau tanya tentang OMODA 04.">Hubungi via WhatsApp</a>
+  </div>
+</nav>
+
+<main id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero__media">
+      <picture>
+        <!-- Desktop: foto studio 16:9. Ponsel: foto potret 3:4, supaya mobilnya
+             tidak terpotong di layar sempit. Keduanya OMODA 04 EV biru. -->
+        <source media="(min-width:768px)" srcset="hero-banner-desktop.webp" width="1512" height="851">
+        <img class="hero__img" src="omoda-4-car-thumbnail.webp"
+             alt="OMODA 04 EV biru tampak depan samping."
+             width="1200" height="1600" fetchpriority="high" decoding="async">
+      </picture>
+      <div class="hero__copy">
+        <p class="hero__welcome">Selamat Datang di OMODA</p>
+        <p class="hero__tag">CROSS FUTURE</p>
+        <div class="hero__cta">
+          <a class="btn btn--light" href="#lineup">Jelajahi Mobil</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LINEUP ===================== -->
+  <section class="lineup" id="lineup">
+    <div class="wrap">
+      <h1 class="sec-title">OMODA Lineup</h1>
+
+      <div class="lineup__tabs" role="tablist">
+        <button class="lineup__tab" role="tab" aria-selected="true">OMODA 04</button>
+      </div>
+      <div class="lineup__rule"></div>
+
+      <article class="car">
+        <div class="car__media">
+          <img class="car__img" src="omoda-4-car-thumbnail.webp" alt="OMODA 04 EV biru tampak tiga perempat depan." width="1842" height="1038" loading="lazy" decoding="async">
+        </div>
+        <h2 class="car__name">OMODA 04 EV</h2>
+        <p class="car__from">Mulai dari | *OTR Semarang</p>
+        <p class="car__price">IDR XXX.XXX.XXX</p>
+        <p class="car__note">*Harga dapat berubah. Konfirmasi harga terkini via WhatsApp.</p>
+
+        <div class="car__divider"></div>
+
+        <div class="specs">
+          <h3>Highlight Specs</h3>
+          <ul>
+            <li>Cyber Mecha Design</li>
+            <li>Jangkauan 553 km (NEDC)</li>
+            <li>AI Smart Cockpit</li>
+            <li>Fast charging DC</li>
+            <li>Paket ADAS berkendara</li>
+          </ul>
+        </div>
+
+        <div class="car__actions">
+          <a class="btn btn--dark" href="#" data-wa="Halo, saya mau info detail produk OMODA 04 EV (harga, warna, ketersediaan) untuk wilayah Semarang.">Lihat Detail Produk</a>
+          <a class="btn btn--ghost" href="#" data-wa="Halo, saya mau simulasi kredit OMODA 04 EV di Semarang. Boleh dikirim rinciannya?">Simulasi Kredit</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== OUR STORY ===================== -->
+  <section class="story" id="story">
+    <img class="story__img" src="hero-banner-desktop.webp" alt="OMODA 04 EV biru di ruang pamer." width="1512" height="851" loading="lazy" decoding="async">
+    <div class="story__body">
+      <h2 class="story__title">Cerita Kami</h2>
+      <p class="story__text">
+        OMODA adalah seri crossover untuk generasi baru yang menuntut lebih dari sekadar
+        kendaraan. Dibangun di atas empat pilar &mdash; future, fashion, green, dan technology &mdash;
+        OMODA menghadirkan desain berani dan teknologi terdepan dalam satu paket yang siap
+        dipakai setiap hari.
+      </p>
+      <a class="btn btn--light" href="#" data-wa="Halo, saya mau tahu lebih lanjut tentang OMODA dan lini produknya.">Baca Cerita Lengkap</a>
+    </div>
+  </section>
+
+  <!-- ===================== UPDATE ===================== -->
+  <section class="update" id="update">
+    <div class="wrap">
+      <h2 class="sec-title">OMODA Update</h2>
+      <div class="cards">
+
+        <article class="card">
+          <div class="card__media"><img src="Banner%20Ai.jpeg" alt="Poster pre-order OMODA 04 EV: gratis upgrade senilai hingga IDR 50 juta." loading="lazy" decoding="async"></div>
+          <h3>Pre-Order OMODA 04 EV</h3>
+          <p>1.000 pemesan pertama mendapatkan benefit tambahan. Kuota nasional, berlaku juga di Semarang.</p>
+          <a href="#" data-wa="Halo, saya mau ikut pre-order OMODA 04 EV. Benefitnya apa saja?">Tanya Benefit</a>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><img src="Banner%20Utama.jpeg" alt="Poster pre-book OMODA 04 EV di GIIAS 2026, 30 Juli sampai 9 Agustus 2026 di ICE BSD City, plus free body kit untuk pemesanan JAECOO J5." loading="lazy" decoding="async"></div>
+          <h3>Pre-Book di GIIAS 2026</h3>
+          <p>Berlangsung 30 Juli&ndash;9 Agustus 2026 di ICE BSD City. Pemesanan JAECOO J5 selama event dapat free body kit.</p>
+          <a href="#" data-wa="Halo, saya mau ikut pre-book OMODA 04 EV di GIIAS 2026. Boleh dibantu prosesnya dari Semarang?">Tanya Pre-Book</a>
+        </article>
+
+        <article class="card">
+          <div class="card__media"><div class="ph ph-16-9" data-name="update-3.jpg &middot; 800×450"></div></div>
+          <h3>Program Kepemilikan</h3>
+          <p>Skema DP dan tenor yang bisa disesuaikan, lengkap dengan garansi dan layanan purna jual.</p>
+          <a href="#" data-wa="Halo, saya mau info program kepemilikan dan garansi OMODA 04 EV.">Minta Rincian</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DEALER ===================== -->
+  <section class="dealer" id="dealer">
+    <div class="wrap">
+      <h2 class="dealer__title">Dealer<br>Semarang</h2>
+      <p class="dealer__text">
+        Satu titik untuk konsultasi, test drive, pemesanan, sampai layanan purna jual.
+      </p>
+      <div class="dealer__media">
+        <iframe class="dealer__map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.401737235811!2d110.38903647454146!3d-6.96184546816202!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70f500523d9d1d%3A0x58749a72235a7df7!2sJAECOO%20SEMARANG!5e0!3m2!1sid!2sid!4v1785789875955!5m2!1sid!2sid"
+          title="Peta lokasi OMODA JAECOO Sun Semarang, Jl. Madukoro Raya No. 45"
+          loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <ul class="dealer__list">
+        <li><strong>Alamat</strong>Jl. Madukoro Raya No. 45, Tawangsari, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50144</li>
+        <li><strong>Jam operasional</strong>Senin&ndash;Sabtu, 08.00&ndash;17.00 WIB</li>
+        <li><strong>Layanan</strong>Konsultasi produk, test drive, pre-order, kredit</li>
+      </ul>
+      <a class="btn btn--light" href="#" data-wa="Halo, saya mau tanya lokasi dan jam kunjungan dealer OMODA Semarang.">Hubungi Dealer</a>
+    </div>
+  </section>
+
+  <!-- ===================== ACTION LIST ===================== -->
+  <section class="actions">
+    <div class="wrap">
+      <a class="action" href="#" data-wa="Halo, saya mau mulai proses pre-order OMODA 04 EV. Tolong dibantu langkah-langkahnya.">
+        <div class="action__icon" aria-hidden="true"></div>
+        <h2 class="action__title">Pre-Order</h2>
+        <p class="action__sub">Pilih varian, warna, dan mulai pemesanan Anda.</p>
+      </a>
+
+      <a class="action" href="#" data-wa="Halo, saya mau dibantu konsultasi OMODA 04 EV untuk wilayah Semarang.">
+        <div class="action__icon" aria-hidden="true"></div>
+        <h2 class="action__title">Konsultasi</h2>
+        <p class="action__sub">Tanya harga, stok, dan simulasi kredit langsung ke sales.</p>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer__mark"><img src="logo_dark.png" alt="OMODA | JAECOO"></div>
+  OMODA | JAECOO Semarang<br>
+  Jl. Madukoro Raya No. 45, Tawangsari, Kec. Semarang Barat, Kota Semarang, Jawa Tengah 50144
+  <div class="footer__social">
+    <a href="https://www.tiktok.com/@jaecoosemarang" target="_blank" rel="noopener" aria-label="TikTok OMODA JAECOO Semarang"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .77-5.06V9.68a5.67 5.67 0 0 0-.77-.05A5.68 5.68 0 1 0 15.54 15.3V8.9a7.34 7.34 0 0 0 4.3 1.38V7.19a4.29 4.29 0 0 1-3.24-1.37z"/></svg></a>
+    <a href="https://www.instagram.com/omodajaecoosemarangg" target="_blank" rel="noopener" aria-label="Instagram OMODA JAECOO Semarang"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 2.16c-3.15 0-3.5.01-4.74.07-1.14.05-1.76.24-2.17.4-.55.21-.94.47-1.35.88-.41.41-.67.8-.88 1.35-.16.41-.35 1.03-.4 2.17-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.05 1.14.24 1.76.4 2.17.21.55.47.94.88 1.35.41.41.8.67 1.35.88.41.16 1.03.35 2.17.4 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.14-.05 1.76-.24 2.17-.4.55-.21.94-.47 1.35-.88.41-.41.67-.8.88-1.35.16-.41.35-1.03.4-2.17.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.14-.24-1.76-.4-2.17-.21-.55-.47-.94-.88-1.35-.41-.41-.8-.67-1.35-.88-.41-.16-1.03-.35-2.17-.4-1.24-.06-1.59-.07-4.74-.07zm0 3.68a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 2.16a3.84 3.84 0 1 0 0 7.68 3.84 3.84 0 0 0 0-7.68zm6.24-.66a1.4 1.4 0 1 1 0-2.8 1.4 1.4 0 0 1 0 2.8z"/></svg></a>
+  </div>
+  <div class="footer__links">
+    <a href="#lineup">Lineup</a>
+    <a href="#story">Tentang</a>
+    <a href="#update">Promo</a>
+    <a href="#dealer">Dealer</a>
+    <a href="#" data-wa="Halo, saya mau tanya tentang OMODA 04.">WhatsApp</a>
+  </div>
+  <small>Situs informasi sales resmi. Harga dan spesifikasi dapat berubah sewaktu-waktu.</small>
+</footer>
+
+<!-- ===================== POP-UP PROMO =====================
+     Gambar promo melebar. Dimulai dgn hidden supaya tanpa JavaScript
+     halaman tetap bisa dibaca penuh tanpa terhalang apa pun.
+     Muncul setiap kali halaman dibuka; ditutup hanya untuk kunjungan itu. -->
+<div class="pop" id="pop" hidden>
+  <div class="pop__veil" data-pop-close aria-hidden="true"></div>
+  <div class="pop__box" role="dialog" aria-modal="true" aria-label="Benefit pre-order OMODA 04 EV">
+    <button class="pop__close" type="button" data-pop-close aria-label="Tutup penawaran">&times;</button>
+    <div class="pop__scroll">
+      <img class="pop__img" src="Banner%20Utama.jpeg"
+           alt="Pre-book OMODA 04 EV di GIIAS 2026, 30 Juli sampai 9 Agustus 2026 di ICE BSD City. Pemesanan JAECOO J5 selama event dapat free body kit."
+           width="854" height="1280" decoding="async">
+    </div>
+    <a class="pop__cta" href="#" data-wa="Halo, saya mau ikut pre-order OMODA 04 EV dan masuk kuota 1.000 pertama. Boleh dibantu prosesnya?">
+      Ambil Benefit Pre-Order
+    </a>
+  </div>
+</div>
+
+<!-- ===================== FLOATING ===================== -->
+<aside class="promo" id="promo">
+  <button class="promo__close" id="promoClose" aria-label="Tutup penawaran">&times;</button>
+  <img src="Banner%20Utama.jpeg" alt="Pre-book OMODA 04 EV di GIIAS 2026." loading="lazy" decoding="async">
+  <a class="promo__cta" href="#" data-wa="Halo, saya mau pre-order OMODA 04 EV sekarang.">Pre-Order Sekarang</a>
+</aside>
+
+<a class="fab" id="waFab" href="#" aria-label="Chat WhatsApp" data-wa="Halo, saya mau tanya tentang OMODA 04 EV di Semarang.">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47 0 1.46 1.06 2.87 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35zM12.04 21.5h-.01a9.4 9.4 0 0 1-4.79-1.31l-.34-.2-3.56.93.95-3.47-.22-.36a9.38 9.38 0 0 1-1.44-5.01c0-5.19 4.23-9.41 9.42-9.41a9.36 9.36 0 0 1 6.66 2.76 9.34 9.34 0 0 1 2.76 6.66c0 5.19-4.23 9.41-9.43 9.41zM20.5 3.55A11.28 11.28 0 0 0 12.04.05C5.8.05.72 5.13.72 11.37c0 2 .52 3.95 1.52 5.67L.63 23l6.1-1.6a11.3 11.3 0 0 0 5.31 1.35h.01c6.24 0 11.32-5.08 11.32-11.32 0-3.02-1.18-5.87-3.32-8.01z"/></svg>
+</a>
+
+<script>
+/* ------------------------------------------------------------
+   KONFIGURASI — ubah cuma di sini
+   ------------------------------------------------------------ */
+var WA_NUMBER = "6285155117519";  // format internasional, tanpa + dan tanpa spasi
+var WA_DEFAULT = "Halo, saya mau tanya tentang OMODA 04 EV di Semarang.";
+
+/* Semua <a data-wa="..."> otomatis jadi link WhatsApp */
+document.querySelectorAll('[data-wa]').forEach(function(el){
+  var msg = el.getAttribute('data-wa') || WA_DEFAULT;
+  el.setAttribute('href','https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg));
+  el.setAttribute('target','_blank');
+  el.setAttribute('rel','noopener');
+});
+
+/* Menu */
+var burger = document.getElementById('burger');
+burger.addEventListener('click', function(){
+  var open = document.body.classList.toggle('nav-open');
+  burger.setAttribute('aria-expanded', open);
+  burger.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+document.querySelectorAll('#nav a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.body.classList.remove('nav-open');
+    document.body.style.overflow = '';
+    burger.setAttribute('aria-expanded','false');
+  });
+});
+
+/* Header jadi solid setelah scroll */
+var header = document.getElementById('header');
+addEventListener('scroll', function(){
+  header.classList.toggle('is-solid', scrollY > 40);
+}, {passive:true});
+
+/* Tutup banner promo */
+document.getElementById('promoClose').addEventListener('click', function(){
+  document.getElementById('promo').hidden = true;
+});
+
+/* ------------------------------------------------------------
+   POP-UP PROMO
+   Sengaja TANPA localStorage: pop-up muncul lagi setiap kali halaman
+   dibuka atau di-refresh. Menekan X (atau latar / Esc) hanya menutupnya
+   untuk kunjungan itu saja, tidak diingat browser.
+   Konsekuensinya pengunjung yang bolak-balik akan melihatnya berulang —
+   ini memang diminta. Kalau nanti ingin cukup sekali per pengunjung,
+   simpan penanda di localStorage saat tutup lalu periksa saat muat.
+   ------------------------------------------------------------ */
+(function(){
+  var pop = document.getElementById('pop');
+  if (!pop) return;
+
+  pop.hidden = false;
+  requestAnimationFrame(function(){ pop.classList.add('is-open'); });
+
+  function tutup(){
+    pop.classList.remove('is-open');
+    setTimeout(function(){ pop.hidden = true; }, 260);
+  }
+
+  pop.querySelectorAll('[data-pop-close]').forEach(function(b){
+    b.addEventListener('click', tutup);
+  });
+  var cta = pop.querySelector('.pop__cta');
+  if (cta) cta.addEventListener('click', tutup);
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !pop.hidden) tutup();
+  });
+})();
+</script>
+
+</body>
+</html>
