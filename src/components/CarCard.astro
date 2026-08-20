@@ -1,0 +1,40 @@
+---
+/* Kartu satu model di daftar lineup. Dipakai berulang oleh Lineup.astro,
+   jadi menambah mobil di cars.json otomatis menambah kartu di sini. */
+import type { Car } from '../lib/types';
+import { labelStatus, teksHarga, punyaHarga } from '../lib/cars';
+import { waLink, pesanPenawaran } from '../lib/whatsapp';
+interface Props { car: Car }
+const { car } = Astro.props;
+const detail = `/mobil/${car.slug}`;
+---
+<article class="car">
+  <div class="car__media">
+    <a href={detail}>
+      <img class="car__img" src={car.gambar.thumbnail} alt={`${car.nama} tampak tiga perempat depan.`}
+           width="1842" height="1038" loading="lazy" decoding="async" />
+    </a>
+  </div>
+
+  <p class="car__status">{labelStatus(car)}</p>
+  <h2 class="car__name"><a href={detail}>{car.nama}</a></h2>
+
+  {punyaHarga(car)
+    ? <><p class="car__from">Mulai dari | *OTR {car.kategori}</p><p class="car__price">{teksHarga(car)}</p></>
+    : <p class="car__price car__price--menunggu">{teksHarga(car)}</p>}
+  <p class="car__note">Konfirmasi harga dan ketersediaan terkini via WhatsApp.</p>
+
+  <div class="car__divider"></div>
+
+  <div class="specs">
+    <h3>Highlight Specs</h3>
+    <ul>{car.highlight.map((h) => <li>{h}</li>)}</ul>
+  </div>
+
+  <div class="car__actions">
+    <a class="btn btn--dark" href={detail}>Lihat Detail Produk</a>
+    <a class="btn btn--ghost" href={waLink(pesanPenawaran(car.namaPendek))} target="_blank" rel="noopener">
+      Tanya Harga
+    </a>
+  </div>
+</article>

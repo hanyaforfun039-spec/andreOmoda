@@ -1,0 +1,186 @@
+---
+/* =============================================================================
+   omoda-semarang · TENTANG KAMI
+   Menggabungkan tiga hal yang dulu terpisah: cerita merek, profil dealer
+   (alamat, jam buka, peta), dan kontak sales. Digabung supaya pengunjung
+   tidak perlu berpindah halaman hanya untuk mencari alamat atau nomor.
+   ============================================================================ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DealerMap from '../components/DealerMap.astro';
+import { site } from '../lib/site';
+import { getAllCars } from '../lib/cars';
+import { waLink, pesanPenawaran, pesanTestDrive } from '../lib/whatsapp';
+
+const a = site.address;
+const utama = getAllCars()[0];
+
+const pilar = [
+  { nama: 'Future', teks: 'Rancangan yang menatap ke depan, bukan mendaur ulang bentuk lama. Setiap garis punya alasan.' },
+  { nama: 'Fashion', teks: 'Mobil sebagai pernyataan gaya. Cyber Mecha Design lahir dari cara pandang itu.' },
+  { nama: 'Green', teks: 'Penggerak listrik penuh, tanpa emisi buang, dengan jangkauan yang cukup untuk pemakaian harian dan luar kota.' },
+  { nama: 'Technology', teks: 'AI Smart Cockpit dan paket ADAS yang bekerja diam-diam menjaga perjalanan.' },
+];
+
+const layanan = [
+  'Penjelasan produk dan perbandingan varian',
+  'Simulasi pembayaran tunai maupun kredit',
+  'Penjadwalan test drive',
+  'Proses pre-order dan pemantauan unit',
+  'Pendampingan administrasi sampai serah terima',
+];
+
+const deskripsi =
+  `Mengenal OMODA dan ${site.dealerName}. Alamat ${a.street}, ${a.locality}. ` +
+  `Jam buka, layanan, dan kontak langsung ${site.salesName} lewat WhatsApp.`;
+
+/* Halaman ini kini menjadi satu-satunya sumber data dealer, jadi skema
+   AutoDealer dipasang di sini. */
+const skema = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoDealer',
+  '@id': 'https://omodasemarang.id/tentang#dealer',
+  name: site.dealerName,
+  description: deskripsi,
+  url: 'https://omodasemarang.id/tentang',
+  telephone: '+' + site.whatsapp,
+  image: 'https://omodasemarang.id/og-omoda-04.jpg',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: a.street,
+    addressLocality: a.locality,
+    addressRegion: a.region,
+    postalCode: a.postalCode,
+    addressCountry: a.country,
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: -6.9618455, longitude: 110.3890365 },
+  openingHoursSpecification: site.openingHours.map((j) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    opens: j.buka,
+    closes: j.tutup,
+  })),
+  areaServed: [
+    ...site.areaLayanan.map((k) => ({ '@type': 'City', name: k.kota })),
+    { '@type': 'AdministrativeArea', name: 'Jawa Tengah' },
+  ],
+  brand: { '@type': 'Brand', name: 'OMODA' },
+  sameAs: Object.values(site.social).filter(Boolean),
+};
+---
+
+<BaseLayout judul="Tentang Kami & Area Layanan" deskripsi={deskripsi} skema={skema}>
+  <section class="page-head">
+    <div class="wrap">
+      <p class="page-head__eyebrow">Tentang Kami</p>
+      <h1 class="page-head__title">Crossover untuk<br />generasi baru</h1>
+      <p class="page-head__lead">
+        OMODA adalah seri crossover untuk mereka yang menuntut lebih dari sekadar kendaraan.
+        Di Semarang, lininya dilayani oleh {site.dealerName}.
+      </p>
+    </div>
+  </section>
+
+  <section class="model-sec">
+    <div class="wrap">
+      <h2 class="sec-title">Empat Pilar</h2>
+      <div class="pilar">
+        {pilar.map((p) => (
+          <article class="pilar__item">
+            <h3>{p.nama}</h3>
+            <p>{p.teks}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="story">
+    <img
+      class="story__img"
+      src="/hero-banner-desktop.webp"
+      alt="OMODA 04 EV biru di ruang pamer."
+      width="1512"
+      height="851"
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="story__body">
+      <h2 class="story__title">Dealer Resmi<br />di Semarang</h2>
+      <p class="story__text">
+        {site.dealerName} melayani konsultasi produk, test drive, pemesanan, sampai layanan
+        purna jual. Semua pertanyaan ditangani langsung oleh {site.salesName}, tanpa perantara,
+        lewat WhatsApp maupun kunjungan ke dealer.
+      </p>
+    </div>
+  </section>
+
+  <section class="model-sec model-sec--alt">
+    <div class="wrap">
+      <h2 class="sec-title">Yang Kami Bantu</h2>
+      <ul class="model__highlight">{layanan.map((l) => <li>{l}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="model-sec">
+    <div class="wrap">
+      <h2 class="sec-title">Area Layanan</h2>
+      <p class="petunjuk-area">
+        Dealer kami di Semarang melayani pembelian dari seluruh Jawa Tengah.
+        Untuk pemesan luar kota, konsultasi dan pengurusan dokumen dapat
+        dilakukan jarak jauh, dan unit dikirim sampai alamat.
+      </p>
+      <div class="area">
+        {site.areaLayanan.map((k) => (
+          <article class="area__item">
+            <h3>{k.kota}</h3>
+            <p>{k.catatan}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="dealer" id="dealer">
+    <div class="wrap">
+      <h2 class="dealer__title">Lokasi &amp;<br />Kontak</h2>
+      <p class="dealer__text">
+        Satu titik untuk konsultasi, test drive, pemesanan, sampai layanan purna jual.
+      </p>
+      <DealerMap />
+      <ul class="dealer__list">
+        <li><strong>Alamat</strong>{a.street}, {a.locality}, {a.region} {a.postalCode}</li>
+        {site.openingHours.map((j) => (
+          <li><strong>Jam operasional</strong>{j.hari}, {j.buka}&ndash;{j.tutup} WIB</li>
+        ))}
+        <li><strong>Sales</strong>{site.salesName}</li>
+        <li><strong>WhatsApp</strong>{site.phoneDisplay}</li>
+        <li><strong>Layanan</strong>Konsultasi produk, test drive, pre-order, kredit, purna jual</li>
+      </ul>
+      <div class="model__actions">
+        <a class="btn btn--light" href={waLink(pesanPenawaran())} target="_blank" rel="noopener">
+          Chat WhatsApp
+        </a>
+        <a
+          class="btn btn--ghost"
+          href={waLink(pesanTestDrive(utama.namaPendek))}
+          target="_blank"
+          rel="noopener">
+          Jadwalkan Test Drive
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="actions">
+    <div class="wrap">
+      <a class="action" href={`/mobil/${utama.slug}`}>
+        <h2 class="action__title">Lihat {utama.nama}</h2>
+        <p class="action__sub">Spesifikasi lengkap, sorotan fitur, dan pertanyaan umum.</p>
+      </a>
+      <a class="action" href={waLink(pesanPenawaran())} target="_blank" rel="noopener">
+        <h2 class="action__title">Konsultasi</h2>
+        <p class="action__sub">Tanya apa pun soal OMODA, dijawab langsung oleh {site.salesName}.</p>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

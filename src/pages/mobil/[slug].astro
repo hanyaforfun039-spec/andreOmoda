@@ -1,0 +1,169 @@
+---
+/* =============================================================================
+   omoda-semarang · HALAMAN DETAIL MODEL
+   Rute dinamis: satu berkas ini melayani SEMUA model. Menambah mobil cukup
+   dgn menambah entri di src/data/cars.json — halamannya terbit sendiri.
+
+   TATA LETAK: pita judul gelap, lalu satu kisi dua kolom.
+   Kolom kiri memuat SELURUH isi panjang (foto, angka, spesifikasi, FAQ),
+   kolom kanan memuat panel harga + tombol yang menempel. Isi panjang di kiri
+   itulah yang memberi panel ruang untuk menempel — tanpa itu, panel tidak
+   punya jarak untuk bergerak dan `position:sticky` tidak berefek apa pun.
+   Di bawah 960px keduanya menumpuk dan panel berhenti menempel.
+   ============================================================================ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllCars, labelStatus, teksHarga, punyaHarga } from '../../lib/cars';
+import { site } from '../../lib/site';
+import { waLink, pesanPreOrder, pesanTestDrive, pesanPenawaran } from '../../lib/whatsapp';
+import type { Car } from '../../lib/types';
+
+export function getStaticPaths() {
+  return getAllCars().map((car) => ({ params: { slug: car.slug }, props: { car } }));
+}
+
+interface Props { car: Car }
+const { car } = Astro.props;
+
+const deskripsi =
+  `${car.nama} di ${site.address.locality}. ${car.tagline} ` +
+  `Konsultasi harga, pre-order, dan test drive langsung via WhatsApp bersama ${site.salesName}.`;
+
+const remah = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://omodasemarang.id/' },
+    { '@type': 'ListItem', position: 2, name: car.nama, item: `https://omodasemarang.id/mobil/${car.slug}` },
+  ],
+};
+
+const skema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: car.nama,
+  description: car.tagline,
+  brand: { '@type': 'Brand', name: 'OMODA' },
+  image: new URL(car.gambar.thumbnail, Astro.site).href,
+  ...(punyaHarga(car) && {
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'IDR',
+      price: car.hargaOtr,
+      availability: 'https://schema.org/PreOrder',
+    },
+  }),
+};
+---
+
+<BaseLayout judul={car.nama} deskripsi={deskripsi} skema={[skema, remah]}>
+  <!-- ===== Pita judul ===== -->
+  <section class="judul">
+    <div class="wrap">
+      <p class="judul__eyebrow">{labelStatus(car)} &middot; {car.kategori}</p>
+      <h1 class="judul__teks">{car.nama}</h1>
+      <p class="judul__lead">{car.tagline}</p>
+    </div>
+  </section>
+
+  <!-- ===== Kisi dua kolom ===== -->
+  <section class="isi">
+    <div class="wrap isi__grid">
+      <!-- Kolom kiri: seluruh isi panjang -->
+      <div class="isi__utama">
+        <div class="isi__media">
+          <img
+            src={car.gambar.thumbnail}
+            alt={`${car.nama} tampak tiga perempat depan.`}
+            width="1842"
+            height="1038"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+
+        {car.angka && car.angka.length > 0 && (
+          <div class="angka__grid">
+            {car.angka.map((a) => (
+              <div class="angka__item">
+                <p class="angka__nilai">{a.nilai}{a.satuan && <span class="angka__satuan">{a.satuan}</span>}</p>
+                <p class="angka__label">{a.label}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <h2 class="sec-title sec-title--kiri">Sorotan</h2>
+        <ul class="sorot__poin sorot__poin--terang">
+          {car.highlight.map((h) => <li>{h}</li>)}
+        </ul>
+
+        <h2 class="sec-title sec-title--kiri">Spesifikasi</h2>
+        <div class="spek__grid">
+          {car.specs.map((g) => (
+            <div class="spek__grup">
+              <h3>{g.kategori}</h3>
+              <dl class="spek__daftar">
+                {g.items.map((it) => (
+                  <div class="spek__baris">
+                    <dt>{it.label}</dt>
+                    <dd>{it.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+
+        {car.faq && car.faq.length > 0 && (
+          <>
+            <h2 class="sec-title sec-title--kiri">Pertanyaan Umum</h2>
+            {car.faq.map((f) => (
+              <details class="faq">
+                <summary>{f.tanya}</summary>
+                <p>{f.jawab}</p>
+              </details>
+            ))}
+          </>
+        )}
+      </div>
+
+      <!-- Kolom kanan: panel yang menempel -->
+      <aside class="isi__samping">
+        <div class="isi__lekat">
+          <p class="panel__nama">{car.nama}</p>
+          {punyaHarga(car) && <p class="panel__harga-label">Harga OTR {site.address.locality} mulai</p>}
+          <p class:list={['panel__harga', !punyaHarga(car) && 'panel__harga--menunggu']}>
+            {teksHarga(car)}
+          </p>
+
+          <div class="btn-row btn-row--tegak">
+            <a class="btn btn--dark" href={waLink(pesanPreOrder(car.namaPendek))} target="_blank" rel="noopener">
+              Pre-Order {car.namaPendek}
+            </a>
+            <a class="btn btn--ghost" href={waLink(pesanTestDrive(car.namaPendek))} target="_blank" rel="noopener">
+              Test Drive
+            </a>
+          </div>
+
+          <p class="panel__catatan">
+            Dilayani langsung oleh {site.salesName}, {site.dealerName}.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== Penutup ===== -->
+  <section class="actions">
+    <div class="wrap">
+      <a class="action" href={waLink(pesanPenawaran(car.namaPendek))} target="_blank" rel="noopener">
+        <h2 class="action__title">Minta Penawaran</h2>
+        <p class="action__sub">Harga, stok, dan skema pembayaran untuk {car.nama}.</p>
+      </a>
+      <a class="action" href="/tentang">
+        <h2 class="action__title">Kunjungi Dealer</h2>
+        <p class="action__sub">Lihat unitnya langsung di {site.dealerName}.</p>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

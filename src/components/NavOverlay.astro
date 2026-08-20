@@ -1,0 +1,29 @@
+---
+/* Menu. Hanya tiga tujuan: beranda, model, tentang kami. Tautan WhatsApp
+   tidak dimasukkan sebagai butir menu karena tombol WA sudah mengambang
+   permanen di setiap halaman. */
+import { site } from '../lib/site';
+import { getAllCars } from '../lib/cars';
+import { waLink } from '../lib/whatsapp';
+const cars = getAllCars();
+---
+<nav class="nav" id="nav" aria-label="Menu utama">
+  <div class="nav__mark"><img src="/logo-omoda-jaecoo.png" alt={site.brand} width="882" height="49" /></div>
+  <ul class="nav__list">
+    <li><a class="nav__link" href="/">Beranda</a></li>
+    <li>
+      <details>
+        <summary class="nav__sum">Model</summary>
+        <ul class="nav__sub">
+          {cars.map((c) => <li><a href={`/mobil/${c.slug}`}>{c.nama}</a></li>)}
+        </ul>
+      </details>
+    </li>
+    <li><a class="nav__link" href="/tentang">Tentang Kami</a></li>
+  </ul>
+  <div class="nav__foot">
+    {site.dealerName}<br />
+    {site.address.street}
+    <a href={waLink()} target="_blank" rel="noopener">Hubungi via WhatsApp</a>
+  </div>
+</nav>

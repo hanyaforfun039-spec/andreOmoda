@@ -1,0 +1,8 @@
+---
+import { site } from '../lib/site';
+---
+<div class="dealer__media">
+  <iframe class="dealer__map" src={site.mapEmbed}
+    title={`Peta lokasi ${site.dealerName}, ${site.address.street}`}
+    loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>

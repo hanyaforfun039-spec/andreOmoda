@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Lineup from '../components/Lineup.astro';
+import DealerMap from '../components/DealerMap.astro';
+import { site } from '../lib/site';
+import { getAllCars } from '../lib/cars';
+import { waLink, pesanPreOrder, pesanPenawaran } from '../lib/whatsapp';
+
+const utama = getAllCars()[0];
+
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: site.faqUmum.map((f) => ({
+    '@type': 'Question',
+    name: f.tanya,
+    acceptedAnswer: { '@type': 'Answer', text: f.jawab },
+  })),
+};
+
+const skema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: utama.nama,
+  description: utama.tagline,
+  brand: { '@type': 'Brand', name: 'OMODA' },
+  image: 'https://omodasemarang.id/og-omoda-04.jpg',
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'IDR',
+    availability: 'https://schema.org/PreOrder',
+    url: `https://omodasemarang.id/mobil/${utama.slug}`,
+    seller: { '@id': 'https://omodasemarang.id/#organisasi' },
+  },
+};
+---
+<BaseLayout
+  judul="Dealer Resmi OMODA di Semarang & Jawa Tengah"
+  deskripsi={`Dealer resmi OMODA di Semarang, melayani Solo, Kendal, Demak, Kudus, Salatiga, dan kota lain di Jawa Tengah. ${utama.nama}: jangkauan 553 km NEDC, AI Smart Cockpit. Pre-order dan test drive lewat WhatsApp bersama ${site.salesName}.`}
+  skema={[skema, faq]}
+  headerTransparan
+  popup>
+  <Hero
+    sapaan="Selamat Datang di OMODA"
+    tagline="CROSS FUTURE"
+    ctaLabel="Jelajahi Mobil"
+    ctaHref="#lineup"
+    gambarDesktop={utama.gambar.heroDesktop ?? utama.gambar.thumbnail}
+    gambarPonsel={utama.gambar.heroMobile ?? utama.gambar.thumbnail}
+    alt={`${utama.nama} biru tampak depan samping.`}
+  />
+
+  <Lineup />
+
+  <section class="story" id="story">
+    <img class="story__img" src="/hero-banner-desktop.webp" alt="OMODA 04 EV biru di ruang pamer."
+         width="1512" height="851" loading="lazy" decoding="async" />
+    <div class="story__body">
+      <h2 class="story__title">Cerita Kami</h2>
+      <p class="story__text">
+        OMODA adalah seri crossover untuk generasi baru yang menuntut lebih dari sekadar
+        kendaraan. Dibangun di atas empat pilar &mdash; future, fashion, green, dan technology
+        &mdash; OMODA menghadirkan desain berani dan teknologi terdepan dalam satu paket yang
+        siap dipakai setiap hari.
+      </p>
+      <a class="btn btn--light" href="/tentang">Baca Cerita Lengkap</a>
+    </div>
+  </section>
+
+  <section class="update" id="update">
+    <div class="wrap">
+      <h2 class="sec-title">OMODA Update</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="card__media">
+            <img src="/banner-ai.jpeg" alt="Poster pre-order OMODA 04 EV: gratis upgrade senilai hingga IDR 50 juta."
+                 loading="lazy" decoding="async" />
+          </div>
+          <h3>Pre-Order OMODA 04 EV</h3>
+          <p>1.000 pemesan pertama mendapat benefit hingga IDR 50 juta. Kuota nasional, berlaku juga di Semarang.</p>
+          <a href={waLink(pesanPreOrder(utama.namaPendek))} target="_blank" rel="noopener">Tanya Benefit</a>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="/banner-utama.jpeg" alt="Pre-book OMODA 04 EV di GIIAS 2026, 30 Juli sampai 9 Agustus 2026 di ICE BSD City."
+                 loading="lazy" decoding="async" />
+          </div>
+          <h3>Pre-Book di GIIAS 2026</h3>
+          <p>Berlangsung 30 Juli&ndash;9 Agustus 2026 di ICE BSD City. Pemesanan JAECOO J5 selama event dapat free body kit.</p>
+          <a href={waLink('Halo, saya mau ikut pre-book OMODA 04 EV di GIIAS 2026. Boleh dibantu prosesnya dari Semarang?')} target="_blank" rel="noopener">Tanya Pre-Book</a>
+        </article>
+
+        <article class="card">
+          <div class="card__media">
+            <img src="/banner-panjang.jpeg" alt="Tingkatan benefit pre-order OMODA 04 EV berdasarkan urutan pemesanan."
+                 loading="lazy" decoding="async" />
+          </div>
+          <h3>Tingkatan Benefit</h3>
+          <p>Semakin awal memesan, semakin besar benefitnya. Tiga tingkatan, dari 1.000 pemesan pertama hingga 4.000.</p>
+          <a href={waLink("Halo, saya mau tahu tingkatan benefit pre-order OMODA 04 EV dan sisa kuotanya.")} target="_blank" rel="noopener">Cek Sisa Kuota</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="dealer" id="dealer">
+    <div class="wrap">
+      <h2 class="dealer__title">Dealer<br />Semarang</h2>
+      <p class="dealer__text">Satu titik untuk konsultasi, test drive, pemesanan, sampai layanan purna jual.</p>
+      <DealerMap />
+      <ul class="dealer__list">
+        <li><strong>Alamat</strong>{site.address.street}, {site.address.locality}</li>
+        {site.openingHours.map((j) => <li><strong>Jam operasional</strong>{j.hari}, {j.buka}&ndash;{j.tutup} WIB</li>)}
+        <li><strong>Layanan</strong>Konsultasi produk, test drive, pre-order, kredit</li>
+      </ul>
+      <a class="btn btn--light" href="/tentang">Info Lengkap Dealer</a>
+    </div>
+  </section>
+
+  <section class="model-sec">
+    <div class="wrap wrap--sempit">
+      <h2 class="sec-title">Pertanyaan Umum</h2>
+      {site.faqUmum.map((f) => (
+        <details class="faq">
+          <summary>{f.tanya}</summary>
+          <p>{f.jawab}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <section class="actions">
+    <div class="wrap">
+      <a class="action" href={waLink(pesanPreOrder(utama.namaPendek))} target="_blank" rel="noopener">
+        <h2 class="action__title">Pre-Order</h2>
+        <p class="action__sub">Amankan kuota dan benefit pemesan awal.</p>
+      </a>
+      <a class="action" href={waLink(pesanPenawaran())} target="_blank" rel="noopener">
+        <h2 class="action__title">Konsultasi</h2>
+        <p class="action__sub">Tanya harga, stok, dan skema pembayaran langsung ke sales.</p>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+/* Hero. Dua sumber gambar: potret utk ponsel, 16:9 utk desktop — masing-masing
+   sudah sesuai rasio kotaknya sehingga tidak ada bagian foto yang terpotong. */
+interface Props {
+  sapaan: string;
+  tagline: string;
+  ctaLabel: string;
+  ctaHref: string;
+  gambarDesktop: string;
+  gambarPonsel: string;
+  alt: string;
+}
+const { sapaan, tagline, ctaLabel, ctaHref, gambarDesktop, gambarPonsel, alt } = Astro.props;
+---
+<section class="hero">
+  <div class="hero__media">
+    <picture>
+      <source media="(min-width:768px)" srcset={gambarDesktop} width="1512" height="851" />
+      <img class="hero__img" src={gambarPonsel} alt={alt}
+           width="1200" height="1600" fetchpriority="high" decoding="async" />
+    </picture>
+    <div class="hero__copy">
+      <p class="hero__welcome">{sapaan}</p>
+      <p class="hero__tag">{tagline}</p>
+      <div class="hero__cta">
+        <a class="btn btn--light" href={ctaHref}>{ctaLabel}</a>
+      </div>
+    </div>
+  </div>
+</section>
