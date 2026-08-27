@@ -23,6 +23,10 @@ interface Props {
   skema?: Record<string, unknown> | Record<string, unknown>[];
   /** Gambar khusus untuk pratinjau saat dibagikan. */
   ogImage?: string;
+  /** Pakai `judul` apa adanya tanpa menempelkan akhiran situs. Dipakai di
+      beranda, yang judulnya sudah memuat nama situs sehingga penambahan
+      akhiran hanya membuatnya berulang dan melewati batas panjang. */
+  judulUtuh?: boolean;
   /** Pop-up promo. Mati secara bawaan dan hanya dinyalakan di landing page —
       memunculkannya di setiap halaman membuat orang yang menjelajah harus
       menutupnya berulang kali. */
@@ -37,9 +41,10 @@ const {
   skema,
   ogImage = '/og-omoda-04.jpg',
   popup = false,
+  judulUtuh = false,
 } = Astro.props;
 
-const judulPenuh = `${judul} | ${site.seo.titleSuffix}`;
+const judulPenuh = judulUtuh ? judul : `${judul} | ${site.seo.titleSuffix}`;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const gambarOg = new URL(ogImage, Astro.site).href;
 
@@ -49,9 +54,9 @@ const skemaGlobal = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': 'https://omodasemarang.id/#organisasi',
+    '@id': new URL('/#organisasi', Astro.site).href,
     name: site.dealerName,
-    url: 'https://omodasemarang.id/',
+    url: new URL('/', Astro.site).href,
     logo: new URL('/logo-omoda-jaecoo.png', Astro.site).href,
     telephone: '+' + site.whatsapp,
     address: {
@@ -67,11 +72,11 @@ const skemaGlobal = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    '@id': 'https://omodasemarang.id/#situs',
-    url: 'https://omodasemarang.id/',
+    '@id': new URL('/#situs', Astro.site).href,
+    url: new URL('/', Astro.site).href,
     name: site.brand,
     inLanguage: 'id-ID',
-    publisher: { '@id': 'https://omodasemarang.id/#organisasi' },
+    publisher: { '@id': new URL('/#organisasi', Astro.site).href },
   },
 ];
 
@@ -93,7 +98,9 @@ const semuaSkema = skema ? [...skemaGlobal, ...(Array.isArray(skema) ? skema : [
 
     <meta name="theme-color" content="#000000" />
     <meta name="author" content={site.dealerName} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/icon-512.png" type="image/png" sizes="512x512" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={judulPenuh} />

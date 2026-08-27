@@ -29,21 +29,19 @@ const layanan = [
   'Pendampingan administrasi sampai serah terima',
 ];
 
-const deskripsi =
-  `Mengenal OMODA dan ${site.dealerName}. Alamat ${a.street}, ${a.locality}. ` +
-  `Jam buka, layanan, dan kontak langsung ${site.salesName} lewat WhatsApp.`;
+const deskripsi = site.seo.deskripsiTentang;
 
 /* Halaman ini kini menjadi satu-satunya sumber data dealer, jadi skema
    AutoDealer dipasang di sini. */
 const skema = {
   '@context': 'https://schema.org',
   '@type': 'AutoDealer',
-  '@id': 'https://omodasemarang.id/tentang#dealer',
+  '@id': new URL('/tentang#dealer', Astro.site).href,
   name: site.dealerName,
   description: deskripsi,
-  url: 'https://omodasemarang.id/tentang',
+  url: new URL('/tentang', Astro.site).href,
   telephone: '+' + site.whatsapp,
-  image: 'https://omodasemarang.id/og-omoda-04.jpg',
+  image: new URL('/og-omoda-04.jpg', Astro.site).href,
   address: {
     '@type': 'PostalAddress',
     streetAddress: a.street,

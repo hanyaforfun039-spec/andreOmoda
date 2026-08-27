@@ -12,7 +12,7 @@
    Di bawah 960px keduanya menumpuk dan panel berhenti menempel.
    ============================================================================ */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getAllCars, labelStatus, teksHarga, punyaHarga } from '../../lib/cars';
+import { getAllCars, labelStatus, teksHarga, punyaHarga, merek, sedangPreOrder } from '../../lib/cars';
 import { site } from '../../lib/site';
 import { waLink, pesanPreOrder, pesanTestDrive, pesanPenawaran } from '../../lib/whatsapp';
 import type { Car } from '../../lib/types';
@@ -25,15 +25,24 @@ interface Props { car: Car }
 const { car } = Astro.props;
 
 const deskripsi =
-  `${car.nama} di ${site.address.locality}. ${car.tagline} ` +
-  `Konsultasi harga, pre-order, dan test drive langsung via WhatsApp bersama ${site.salesName}.`;
+  `${car.nama} ${site.seo.modelPembuka} ${car.tagline} ${site.seo.modelPenutup}`;
+
+const faqSkema = car.faq && car.faq.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: car.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.tanya,
+    acceptedAnswer: { '@type': 'Answer', text: f.jawab },
+  })),
+} : null;
 
 const remah = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Beranda', item: 'https://omodasemarang.id/' },
-    { '@type': 'ListItem', position: 2, name: car.nama, item: `https://omodasemarang.id/mobil/${car.slug}` },
+    { '@type': 'ListItem', position: 1, name: 'Beranda', item: new URL('/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: car.nama, item: new URL(`/mobil/${car.slug}`, Astro.site).href },
   ],
 };
 
@@ -42,24 +51,26 @@ const skema = {
   '@type': 'Product',
   name: car.nama,
   description: car.tagline,
-  brand: { '@type': 'Brand', name: 'OMODA' },
+  brand: { '@type': 'Brand', name: merek(car) },
   image: new URL(car.gambar.thumbnail, Astro.site).href,
   ...(punyaHarga(car) && {
     offers: {
       '@type': 'Offer',
       priceCurrency: 'IDR',
       price: car.hargaOtr,
-      availability: 'https://schema.org/PreOrder',
+      availability: sedangPreOrder(car)
+        ? 'https://schema.org/PreOrder'
+        : 'https://schema.org/InStock',
     },
   }),
 };
 ---
 
-<BaseLayout judul={car.nama} deskripsi={deskripsi} skema={[skema, remah]}>
+<BaseLayout judul={car.nama} deskripsi={deskripsi} skema={faqSkema ? [skema, remah, faqSkema] : [skema, remah]}>
   <!-- ===== Pita judul ===== -->
   <section class="judul">
     <div class="wrap">
-      <p class="judul__eyebrow">{labelStatus(car)} &middot; {car.kategori}</p>
+      <p class="judul__eyebrow">{merek(car)} &middot; {labelStatus(car)} &middot; {car.kategori}</p>
       <h1 class="judul__teks">{car.nama}</h1>
       <p class="judul__lead">{car.tagline}</p>
     </div>
@@ -74,8 +85,6 @@ const skema = {
           <img
             src={car.gambar.thumbnail}
             alt={`${car.nama} tampak tiga perempat depan.`}
-            width="1842"
-            height="1038"
             fetchpriority="high"
             decoding="async"
           />
@@ -137,8 +146,10 @@ const skema = {
           </p>
 
           <div class="btn-row btn-row--tegak">
-            <a class="btn btn--dark" href={waLink(pesanPreOrder(car.namaPendek))} target="_blank" rel="noopener">
-              Pre-Order {car.namaPendek}
+            <a class="btn btn--dark"
+               href={waLink(sedangPreOrder(car) ? pesanPreOrder(car.namaPendek) : pesanPenawaran(car.namaPendek))}
+               target="_blank" rel="noopener">
+              {sedangPreOrder(car) ? `Pre-Order ${car.namaPendek}` : 'Minta Penawaran'}
             </a>
             <a class="btn btn--ghost" href={waLink(pesanTestDrive(car.namaPendek))} target="_blank" rel="noopener">
               Test Drive

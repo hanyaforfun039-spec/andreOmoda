@@ -104,17 +104,12 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .nav{
   position:fixed;inset:0;z-index:55;
   background:var(--ink);color:var(--paper);
-  padding:calc(var(--header-h) + 24px) var(--pad) 48px;
+  padding:calc(var(--header-h) + 20px) var(--pad) 40px;
   overflow-y:auto;
   opacity:0;visibility:hidden;transform:translateY(-12px);
   transition:opacity .28s ease,transform .28s ease,visibility .28s;
 }
 .nav-open .nav{opacity:1;visibility:visible;transform:none}
-.nav__mark{
-  font-family:var(--display);font-weight:700;
-  font-size:clamp(34px,11vw,64px);letter-spacing:.16em;
-  text-align:center;margin:8px 0 28px;
-}
 .nav__list{list-style:none;border-top:1px solid #fff}
 .nav__list>li{border-bottom:1px solid #fff}
 .nav__link,.nav__sum{
@@ -406,13 +401,11 @@ details[open] .nav__sum::after{transform:rotate(225deg) translate(-2px,-2px)}
    Wordmark putih (logo_dark.png = logo UNTUK latar gelap).
    Dipakai di header, menu, dan footer yang semuanya berlatar gelap.
    ============================================================ */
-.logo img{display:block;height:18px;width:auto}
-.nav__mark img{display:block;height:34px;width:auto;margin:0 auto}
-.footer__mark img{display:block;height:22px;width:auto;margin:0 auto}
+.logo img{display:block;width:auto;height:auto;max-height:18px;max-width:100%}
+.footer__mark img{display:block;width:auto;height:auto;max-height:22px;max-width:100%;margin:0 auto}
 @media(min-width:768px){
-  .logo img{height:22px}
-  .nav__mark img{height:44px}
-}
+  .logo img{max-height:22px}
+  }
 
 /* Peta dealer: iframe bawaan Google berukuran kaku 600x450.
    Dibuat mengikuti lebar wadah dgn rasio 16:9 supaya tidak meluber
@@ -773,3 +766,42 @@ details[open] .nav__sum::after{transform:rotate(225deg) translate(-2px,-2px)}
   letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;
 }
 .area__item p{color:#5e5e5e;font-size:14px;line-height:1.6}
+
+/* Foto model kini berasal dari dua merek dgn rasio berbeda. Kotak dipatok
+   16:9 dan gambar memakai `contain` agar tidak ada yang terpotong. */
+.isi__media{aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden}
+.isi__media img{width:100%;height:100%;object-fit:contain}
+
+/* Logo wordmark berasio 18:1. Mengunci `height` lalu membiarkan
+   `img{max-width:100%}` memangkas lebarnya membuat rasionya rusak di layar
+   sempit — logo tampak gepeng. Kedua dimensi dibiarkan auto dan dibatasi
+   lewat max-height/max-width supaya rasionya selalu terjaga. */
+
+/* ============================================================
+   MENU — tata letak setelah wordmark dihilangkan
+   Isi menu ditengahkan tegak lurus dan lebarnya dibatasi, supaya
+   ruang kosong terbaca sebagai kelegaan yang disengaja, bukan sisa
+   elemen yang dicabut. Kalau isinya melebihi tinggi layar, kisi
+   otomatis kembali menggulir dari atas.
+   ============================================================ */
+.nav{
+  display:grid;
+  grid-template-rows:1fr auto;
+  align-content:center;
+  gap:34px;
+}
+.nav__list{
+  width:100%;
+  max-width:520px;
+  margin:0 auto;
+  align-self:center;
+}
+.nav__foot{
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
+}
+@media(min-width:768px){
+  .nav__list{max-width:560px}
+  .nav__foot{max-width:560px}
+}

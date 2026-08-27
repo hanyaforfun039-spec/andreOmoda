@@ -25,19 +25,20 @@ const skema = {
   name: utama.nama,
   description: utama.tagline,
   brand: { '@type': 'Brand', name: 'OMODA' },
-  image: 'https://omodasemarang.id/og-omoda-04.jpg',
+  image: new URL('/og-omoda-04.jpg', Astro.site).href,
   offers: {
     '@type': 'Offer',
     priceCurrency: 'IDR',
     availability: 'https://schema.org/PreOrder',
-    url: `https://omodasemarang.id/mobil/${utama.slug}`,
-    seller: { '@id': 'https://omodasemarang.id/#organisasi' },
+    url: new URL(`/mobil/${utama.slug}`, Astro.site).href,
+    seller: { '@id': new URL('/#organisasi', Astro.site).href },
   },
 };
 ---
 <BaseLayout
-  judul="Dealer Resmi OMODA di Semarang & Jawa Tengah"
-  deskripsi={`Dealer resmi OMODA di Semarang, melayani Solo, Kendal, Demak, Kudus, Salatiga, dan kota lain di Jawa Tengah. ${utama.nama}: jangkauan 553 km NEDC, AI Smart Cockpit. Pre-order dan test drive lewat WhatsApp bersama ${site.salesName}.`}
+  judul={site.seo.judulBeranda}
+  judulUtuh
+  deskripsi={site.seo.deskripsiBeranda}
   skema={[skema, faq]}
   headerTransparan
   popup>
