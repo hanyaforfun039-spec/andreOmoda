@@ -61,6 +61,11 @@ const skema = {
       availability: sedangPreOrder(car)
         ? 'https://schema.org/PreOrder'
         : 'https://schema.org/InStock',
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        applicableCountry: 'ID',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+      },
     },
   }),
 };
