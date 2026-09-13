@@ -211,47 +211,106 @@ details[open] .nav__sum::after{transform:rotate(225deg) translate(-2px,-2px)}
   font-size:clamp(30px,8.5vw,56px);letter-spacing:.02em;
   text-transform:uppercase;
 }
+/* Deret nama model. Dengan lima model, ukuran lama (34px, rata tengah)
+   membungkus jadi beberapa baris berantakan di ponsel; kini ia menggulir
+   mendatar dan baru dirapatkan ke tengah kalau muat. */
 .lineup__tabs{
-  margin:34px 0 8px;
-  display:flex;justify-content:center;gap:28px;
-  border-bottom:0;
+  margin:26px 0 8px;
+  display:flex;gap:20px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  padding-inline:2px;
 }
+.lineup__tabs::-webkit-scrollbar{display:none}
 .lineup__tab{
+  flex:none;
   font-family:var(--display);font-weight:700;
-  font-size:clamp(22px,6vw,34px);letter-spacing:.08em;
-  padding-bottom:14px;
+  font-size:16px;letter-spacing:.08em;
+  padding-bottom:11px;
   border-bottom:3px solid transparent;
-  color:#9a9090;
+  color:#9a9090;white-space:nowrap;
 }
-.lineup__tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.lineup__tab:hover,
+.lineup__tab:focus-visible{color:var(--ink);border-bottom-color:var(--accent)}
 .lineup__rule{height:1px;background:var(--line);margin-bottom:34px}
 
 .car__media{margin-bottom:22px}
-.car__name{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:.05em}
-.car__from{margin-top:12px;font-size:15px;color:#4a4a4a}
-.car__price{
-  margin-top:4px;
+
+/* ---- Kisi model di beranda -------------------------------------------
+   Satu kolom di ponsel, dua sejak 620px, tiga sejak 1020px. Kartunya
+   sengaja ringkas: foto, merek, nama, harga, satu tindakan. Spesifikasi
+   TIDAK ditaruh di sini — tempatnya halaman detail. Versi lama memuat
+   daftar 5 spesifikasi + dua tombol sehingga tiap kartu setinggi 800px
+   dan satu model memakan hampir satu layar penuh di ponsel. */
+.lineup__daftar{
+  display:grid;gap:16px;
+  grid-template-columns:1fr;
+  text-align:left;
+}
+.kartu{
+  background:var(--paper);
+  border:1px solid var(--line);
+  display:flex;flex-direction:column;
+  transition:border-color .18s ease,transform .18s ease;
+}
+.kartu:hover{border-color:var(--ink);transform:translateY(-2px)}
+.kartu__tautan{display:block;color:inherit}
+
+/* Foto potongan (cutout 1842x1038) di atas latar terang. Kotaknya dikunci
+   16:9 supaya semua kartu dalam satu baris setinggi sama, dan
+   object-fit:contain menjaga bemper depan/buritan tidak terpotong. */
+.kartu__media{
+  background:linear-gradient(180deg,#fff 0%,#f1ecec 100%);
+  aspect-ratio:16/9;
+}
+.kartu__media img{
+  display:block;width:100%;height:100%;
+  object-fit:contain;object-position:center;
+}
+
+.kartu__isi{padding:15px 17px 17px}
+.kartu__chip{
+  font-family:var(--display);font-weight:600;font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+}
+.kartu__chip span{color:var(--silver);margin:0 3px}
+.kartu__nama{
+  margin-top:7px;
   font-family:var(--display);font-weight:700;
-  font-size:clamp(24px,6.5vw,34px);letter-spacing:.02em;
+  font-size:20px;letter-spacing:.04em;line-height:1.2;
 }
-.car__note{margin-top:6px;font-size:12px;color:#7c7676}
-.car__divider{height:1px;background:var(--line);margin:26px 0}
-.specs{text-align:left;max-width:420px;margin:0 auto}
-.specs h3{
-  font-family:var(--display);font-size:17px;font-weight:700;
-  letter-spacing:.04em;margin-bottom:10px;
+.kartu__harga{
+  margin-top:9px;
+  font-family:var(--display);font-weight:700;
+  font-size:23px;letter-spacing:.01em;
 }
-.specs ul{list-style:none}
-.specs li{
-  position:relative;padding:8px 0 8px 22px;font-size:16px;
-  border-bottom:1px solid rgba(0,0,0,.06);
+.kartu__harga--menunggu{
+  font-family:var(--body);font-weight:600;
+  font-size:15px;letter-spacing:0;color:#565656;
 }
-.specs li::before{
-  content:"";position:absolute;left:4px;top:17px;
-  width:7px;height:7px;background:var(--accent);
-  transform:rotate(45deg);
+.kartu__ket{margin-top:2px;font-size:12px;color:#7c7676}
+
+/* Kaki kartu berada DI LUAR tautan kartu supaya tombol WhatsApp bisa
+   diklik sendiri tanpa ikut membuka halaman detail. */
+.kartu__kaki{
+  margin-top:auto;
+  display:flex;border-top:1px solid var(--line);
 }
-.car__actions{margin-top:28px;display:grid;gap:12px;justify-items:center}
+.kartu__aksi{
+  flex:1;padding:13px 15px;
+  font-family:var(--display);font-weight:700;font-size:13px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
+}
+.kartu__aksi:hover{color:var(--accent)}
+.kartu__wa{
+  display:flex;align-items:center;gap:7px;
+  padding:13px 15px;border-left:1px solid var(--line);
+  font-family:var(--display);font-weight:700;font-size:13px;
+  letter-spacing:.06em;color:#0f8a3d;
+}
+.kartu__wa svg{width:15px;height:15px;fill:currentColor;flex:none}
+.kartu__wa:hover{background:#f2fbf4}
 
 /* ============================================================
    8. OUR STORY
@@ -417,14 +476,6 @@ details[open] .nav__sum::after{transform:rotate(225deg) translate(-2px,-2px)}
   border:0;
 }
 
-/* Foto mobil di Lineup: gambar potongan (cutout) 1842x1038. Sengaja TIDAK
-   diberi aspect-ratio maupun object-fit — dibiarkan tampil pada rasio
-   aslinya supaya bemper depan dan buritan tidak terpotong sedikit pun.
-   Latarnya putih, jadi disamakan dgn latar section ini agar menyatu. */
-.car__img{
-  width:100%;
-  height:auto;
-}
 /* Foto story sudah 16:9 persis seperti kotaknya -> tidak terpotong. */
 .story__img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
 
@@ -629,13 +680,6 @@ details[open] .nav__sum::after{transform:rotate(225deg) translate(-2px,-2px)}
 .langkah{margin:24px 0 0 20px;display:grid;gap:12px}
 .langkah li{font-size:16px;padding-left:6px}
 
-.car__status{
-  font-family:var(--display);font-weight:600;font-size:12px;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
-  margin-bottom:6px;
-}
-.car__price--menunggu{font-size:clamp(17px,4vw,21px);color:#565656}
-.car__media img{display:block;width:100%;height:auto}
 
 /* ============================================================
    18. HALAMAN MODEL — kisi dua kolom + panel menempel
@@ -804,4 +848,15 @@ details[open] .nav__sum::after{transform:rotate(225deg) translate(-2px,-2px)}
 @media(min-width:768px){
   .nav__list{max-width:560px}
   .nav__foot{max-width:560px}
+}
+
+@media(min-width:620px){
+  .lineup__daftar{grid-template-columns:repeat(2,1fr);gap:20px}
+  .kartu__nama{font-size:22px}
+  .kartu__harga{font-size:25px}
+}
+@media(min-width:1020px){
+  .lineup__daftar{grid-template-columns:repeat(3,1fr)}
+  .lineup__tabs{justify-content:center;gap:28px;overflow-x:visible}
+  .lineup__tab{font-size:26px;padding-bottom:14px}
 }

@@ -1,6 +1,6 @@
 ---
-/* Daftar model. Tab hanya muncul kalau modelnya lebih dari satu, sehingga
-   halaman tetap rapi sekarang dan otomatis berguna saat mobil bertambah. */
+/* Daftar model di beranda. Deret nama di atas berfungsi sebagai pintasan ke
+   tiap halaman model; ia hanya muncul kalau modelnya lebih dari satu. */
 import { getAllCars } from '../lib/cars';
 import CarCard from './CarCard.astro';
 const cars = getAllCars();
@@ -10,16 +10,19 @@ const cars = getAllCars();
     <h1 class="sec-title">OMODA Lineup</h1>
 
     {cars.length > 1 && (
-      <div class="lineup__tabs" role="tablist">
-        {cars.map((c, i) => (
-          <a class="lineup__tab" role="tab" aria-selected={i === 0 ? 'true' : 'false'} href={`/mobil/${c.slug}`}>
-            {c.namaPendek}
-          </a>
+      /* Tautan biasa, bukan role="tablist": tombol ini berpindah halaman,
+         bukan menukar panel, sehingga peran tab justru menyesatkan pembaca
+         layar. */
+      <nav class="lineup__tabs" aria-label="Pintasan model">
+        {cars.map((c) => (
+          <a class="lineup__tab" href={`/mobil/${c.slug}`}>{c.namaPendek}</a>
         ))}
-      </div>
+      </nav>
     )}
     <div class="lineup__rule"></div>
 
-    {cars.map((c) => <CarCard car={c} />)}
+    <div class="lineup__daftar">
+      {cars.map((c) => <CarCard car={c} />)}
+    </div>
   </div>
 </section>
