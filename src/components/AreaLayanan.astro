@@ -1,0 +1,33 @@
+---
+/* =============================================================================
+   AreaLayanan — daftar kota yang dilayani, masing-masing dengan catatan yang
+   berbeda isinya.
+
+   Dipakai di BERANDA dan di halaman Tentang. Sebelumnya hanya ada di halaman
+   Tentang, sehingga beranda — satu-satunya halaman yang punya peluang untuk
+   kueri seperti "omoda kendal" atau "omoda solo" — tidak menyebut kota-kota
+   itu sama sekali.
+
+   Catatan tiap kota sengaja ditulis spesifik dan berbeda antar situs. Daftar
+   nama kota tanpa isi yang membedakan terbaca sebagai penjejalan kata kunci
+   dan justru merugikan peringkat.
+   ============================================================================ */
+import { site } from '../lib/site';
+interface Props { judul?: string; lede?: string }
+const { judul = 'Area Layanan', lede } = Astro.props;
+const teks = lede ?? site.seo.ledeArea;
+---
+<section class="model-sec" id="area" aria-labelledby="area-h">
+  <div class="wrap">
+    <h2 class="sec-title" id="area-h">{judul}</h2>
+    <p class="petunjuk-area">{teks}</p>
+    <div class="area">
+      {site.areaLayanan.map((k) => (
+        <article class="area__item">
+          <h3>{k.kota}</h3>
+          <p>{k.catatan}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

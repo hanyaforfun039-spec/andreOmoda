@@ -82,6 +82,8 @@ export interface SiteConfig {
        dua situs tidak menghasilkan deskripsi yang nyaris sama. */
     modelPembuka: string;
     modelPenutup: string;
+    /** Kalimat pembuka bagian Area Layanan. Berbeda tiap situs. */
+    ledeArea: string;
   };
   promoPopup: {
     aktif: boolean;

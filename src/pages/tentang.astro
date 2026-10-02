@@ -6,6 +6,7 @@
    tidak perlu berpindah halaman hanya untuk mencari alamat atau nomor.
    ============================================================================ */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AreaLayanan from '../components/AreaLayanan.astro';
 import DealerMap from '../components/DealerMap.astro';
 import { site } from '../lib/site';
 import { getAllCars } from '../lib/cars';
@@ -119,24 +120,7 @@ const skema = {
     </div>
   </section>
 
-  <section class="model-sec">
-    <div class="wrap">
-      <h2 class="sec-title">Area Layanan</h2>
-      <p class="petunjuk-area">
-        Dealer kami di Semarang melayani pembelian dari seluruh Jawa Tengah.
-        Untuk pemesan luar kota, konsultasi dan pengurusan dokumen dapat
-        dilakukan jarak jauh, dan unit dikirim sampai alamat.
-      </p>
-      <div class="area">
-        {site.areaLayanan.map((k) => (
-          <article class="area__item">
-            <h3>{k.kota}</h3>
-            <p>{k.catatan}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
+  <AreaLayanan judul="Area Layanan" />
 
   <section class="dealer" id="dealer">
     <div class="wrap">

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Lineup from '../components/Lineup.astro';
+import AreaLayanan from '../components/AreaLayanan.astro';
 import DealerMap from '../components/DealerMap.astro';
 import { site } from '../lib/site';
 import { getAllCars } from '../lib/cars';
@@ -54,7 +55,7 @@ const skema = {
   headerTransparan
   popup>
   <Hero
-    sapaan="Selamat Datang di OMODA"
+    sapaan="Dealer Resmi OMODA Semarang"
     tagline="CROSS FUTURE"
     ctaLabel="Jelajahi Mobil"
     ctaHref="#lineup"
@@ -64,6 +65,8 @@ const skema = {
   />
 
   <Lineup />
+
+  <AreaLayanan />
 
   <section class="story" id="story">
     <img class="story__img" src="/hero-banner-desktop.webp" alt="OMODA 04 EV biru di ruang pamer."

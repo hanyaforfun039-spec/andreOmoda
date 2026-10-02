@@ -20,7 +20,10 @@ const { sapaan, tagline, ctaLabel, ctaHref, gambarDesktop, gambarPonsel, alt } =
            width="1200" height="1600" fetchpriority="high" decoding="async" />
     </picture>
     <div class="hero__copy">
-      <p class="hero__welcome">{sapaan}</p>
+      <!-- H1 halaman. Sebelumnya judul utama beranda adalah "OMODA Lineup"
+           di bagian daftar model: tanpa nama merek maupun lokasi, sehingga
+           halaman tidak menyatakan dirinya tentang apa dan di mana. -->
+      <h1 class="hero__welcome">{sapaan}</h1>
       <p class="hero__tag">{tagline}</p>
       <div class="hero__cta">
         <a class="btn btn--light" href={ctaHref}>{ctaLabel}</a>

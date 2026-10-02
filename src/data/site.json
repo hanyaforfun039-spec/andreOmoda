@@ -32,7 +32,8 @@
     "deskripsiBeranda": "Dealer resmi OMODA di Semarang. Tanya harga, amankan kuota pre-order, dan jadwalkan test drive OMODA 04 EV langsung ke Andre lewat WhatsApp.",
     "deskripsiTentang": "Profil dealer resmi OMODA di Semarang dan kota-kota yang kami layani di Jawa Tengah. Alamat, jam buka, dan kontak langsung Andre.",
     "modelPembuka": "di Semarang.",
-    "modelPenutup": "Tanya harga dan jadwalkan test drive langsung ke Andre lewat WhatsApp."
+    "modelPenutup": "Tanya harga dan jadwalkan test drive langsung ke Andre lewat WhatsApp.",
+    "ledeArea": "Showroom kami di Semarang, tetapi pembelian dilayani dari seluruh Jawa Tengah. Untuk pemesan luar kota, konsultasi dan pengurusan dokumen dapat dilakukan jarak jauh dan unit dikirim sampai alamat."
   },
   "promoPopup": {
     "aktif": true,
@@ -53,43 +54,43 @@
   "areaLayanan": [
     {
       "kota": "Semarang",
-      "catatan": "Kota dealer. Test drive, pengecekan unit, dan serah terima langsung di showroom Madukoro."
+      "catatan": "Kota showroom. Seluruh proses bisa selesai dalam satu kunjungan: cek unit, simulasi kredit, tanda tangan, serah terima."
     },
     {
       "kota": "Ungaran",
-      "catatan": "Sekitar 30 menit dari dealer. Kunjungan sales ke rumah atau kantor atas permintaan."
+      "catatan": "Sekitar 30 menit. Berkas kredit bisa dijemput ke rumah atau kantor, jadi Anda cukup datang sekali saat serah terima."
     },
     {
       "kota": "Kendal",
-      "catatan": "Sekitar 45 menit dari dealer. Pengiriman unit sampai alamat setelah administrasi selesai."
+      "catatan": "Sekitar 45 menit. Pengajuan leasing diproses dari showroom; unit dikirim setelah approval turun."
     },
     {
       "kota": "Demak",
-      "catatan": "Sekitar 45 menit dari dealer. Konsultasi dan pengurusan dokumen dapat dilakukan jarak jauh."
+      "catatan": "Sekitar 45 menit. Konsultasi, pengisian data, dan tanda tangan dokumen dapat diurus jarak jauh."
     },
     {
       "kota": "Salatiga",
-      "catatan": "Sekitar 1 jam dari dealer. Penjadwalan test drive menyesuaikan waktu kunjungan Anda."
+      "catatan": "Sekitar 1 jam. Jadwal test drive dan penyerahan unit menyesuaikan hari libur Anda."
     },
     {
       "kota": "Kudus",
-      "catatan": "Sekitar 1,5 jam dari dealer. Pengiriman unit dan pendampingan administrasi tersedia."
+      "catatan": "Sekitar 1,5 jam. Pendampingan leasing penuh, termasuk pengurusan STNK dan BPKB."
     },
     {
       "kota": "Surakarta (Solo)",
-      "catatan": "Sekitar 2 jam dari dealer. Melayani pemesanan luar kota dengan pengiriman sampai alamat."
+      "catatan": "Sekitar 2 jam. Pemesanan luar kota: dokumen lewat kurir, unit diantar sampai alamat."
     },
     {
       "kota": "Magelang",
-      "catatan": "Sekitar 2 jam dari dealer. Konsultasi lewat WhatsApp, unit dikirim setelah unit siap."
+      "catatan": "Sekitar 2 jam. Negosiasi harga dan pilihan paket kredit dibahas lewat WhatsApp sebelum unit berangkat."
     },
     {
       "kota": "Pekalongan",
-      "catatan": "Sekitar 2 jam dari dealer. Pemesanan jarak jauh dengan pengiriman unit ke alamat."
+      "catatan": "Sekitar 2 jam. Proses dari pemesanan sampai pelat nomor terbit diurus dari Semarang."
     },
     {
       "kota": "Pati",
-      "catatan": "Sekitar 2 jam dari dealer. Pendampingan proses dari pemesanan sampai serah terima."
+      "catatan": "Sekitar 2 jam. Satu orang sales mendampingi dari awal sampai kunci diserahkan."
     }
   ],
   "faqUmum": [
