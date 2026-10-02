@@ -73,7 +73,13 @@ const skema = {
 };
 ---
 
-<BaseLayout judul={car.nama} deskripsi={deskripsi} skema={faqSkema ? [skema, remah, faqSkema] : [skema, remah]}>
+<BaseLayout judul={car.nama} deskripsi={deskripsi} skema={[
+    /* Product dilewati saat harga belum keluar: Google menolak Product
+       tanpa offers/review/aggregateRating, dan offers wajib punya price. */
+    ...(punyaHarga(car) ? [skema] : []),
+    remah,
+    ...(faqSkema ? [faqSkema] : []),
+  ]}>
   <!-- ===== Pita judul ===== -->
   <section class="judul">
     <div class="wrap">

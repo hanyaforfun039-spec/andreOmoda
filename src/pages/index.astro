@@ -27,9 +27,11 @@ const skema = {
   description: utama.tagline,
   brand: { '@type': 'Brand', name: 'OMODA' },
   image: new URL('/og-omoda-04.jpg', Astro.site).href,
-    /* Hanya kirim `offers` bila harganya benar-benar ada. Offer tanpa
-       `price` ditolak Google sebagai galat kritis dan justru membuat
-       halaman tidak muncul sebagai hasil kaya. */
+    /* Offer hanya dikirim bila harganya benar-benar ada: Offer tanpa
+       `price` ditolak Google sebagai galat kritis. Tapi Product TANPA
+       offers juga ditolak ("offers, review, atau aggregateRating harus
+       ditentukan"), jadi blok Product-nya sendiri ikut dilewati saat
+       harga belum keluar — lihat pemakaiannya di bawah. */
     ...(utama.hargaOtr != null && {
       offers: {
         '@type': 'Offer',
@@ -51,7 +53,7 @@ const skema = {
   judul={site.seo.judulBeranda}
   judulUtuh
   deskripsi={site.seo.deskripsiBeranda}
-  skema={[skema, faq]}
+  skema={utama.hargaOtr != null ? [skema, faq] : [faq]}
   headerTransparan
   popup>
   <Hero
