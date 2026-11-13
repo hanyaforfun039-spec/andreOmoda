@@ -1,0 +1,223 @@
+---
+/* =============================================================================
+   Daftar harga OTR.
+
+   KENAPA ADA: pertanyaan pertama hampir semua pembeli adalah harga, dan
+   sebelumnya angka itu tersebar satu-satu di kartu lineup dan halaman model.
+   Tidak ada satu halaman pun yang bisa dijawab dengan "ini daftarnya".
+
+   Angkanya dibaca dari data yang sama dengan halaman model, jadi tidak ada
+   daftar kedua yang bisa tertinggal saat harga berubah.
+   ============================================================================ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+import { getAllCars, teksHarga, punyaHarga, merek, labelStatus, sedangPreOrder } from '../lib/cars';
+import { waLink, pesanPenawaran } from '../lib/whatsapp';
+
+const cars = getAllCars();
+const berharga = cars.filter(punyaHarga);
+const preBook = cars.filter(sedangPreOrder);
+
+const kota = site.address.locality;
+
+const judul = `Daftar Harga OMODA & JAECOO ${kota}`;
+const deskripsi =
+  `Harga OTR ${kota} untuk ${berharga.map((c) => c.namaPendek).join(', ')}. ` +
+  `Simulasi kredit, tukar tambah, dan test drive dibantu ${site.salesName} lewat WhatsApp.`;
+
+const remah = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Beranda', item: new URL('/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: 'Daftar Harga', item: new URL('/harga', Astro.site).href },
+  ],
+};
+
+/* ItemList, bukan Product: halaman ini mendaftar banyak model sekaligus.
+   Tiap entri menunjuk ke halaman modelnya, tempat Product yang sebenarnya
+   berada. Model tanpa harga tidak dimasukkan — Offer wajib punya price. */
+const daftarSkema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: judul,
+  itemListElement: berharga.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Product',
+      name: c.nama,
+      url: new URL(`/mobil/${c.slug}`, Astro.site).href,
+      brand: { '@type': 'Brand', name: merek(c) },
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'IDR',
+        price: c.hargaOtr,
+        availability: 'https://schema.org/InStock',
+      },
+    },
+  })),
+};
+
+const tanya: [string, string][] = [
+  [
+    'Harga ini sudah termasuk apa saja?',
+    `Angka di atas adalah harga OTR ${kota}: sudah termasuk BBN, STNK, dan pelat nomor, ` +
+    'jadi mobil siap jalan. Yang belum termasuk adalah aksesori tambahan di luar bawaan pabrik.',
+  ],
+  [
+    'Apakah harga bisa berubah?',
+    'Bisa. Harga OTR mengikuti ketetapan pabrikan dan dapat berubah sewaktu-waktu. ' +
+    'Halaman ini diperbarui mengikuti pricelist terbaru, tapi konfirmasi lewat WhatsApp ' +
+    'tetap cara paling pasti sebelum memesan.',
+  ],
+  [
+    'Bisa kredit? Berapa DP-nya?',
+    'Bisa. Besar DP dan cicilan bergantung tenor serta hasil pengajuan leasing. ' +
+    `Kirim model yang Anda incar lewat WhatsApp, ${site.salesName} akan menghitungkan ` +
+    'beberapa pilihan tenor sekaligus.',
+  ],
+  [
+    'Melayani tukar tambah?',
+    'Ya. Mobil lama Anda dinilai lebih dulu, dan nilainya dipotongkan dari harga unit baru ' +
+    'atau dijadikan uang muka.',
+  ],
+];
+
+const faqSkema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: tanya.map(([q, a]) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<BaseLayout judul={judul} deskripsi={deskripsi} skema={[remah, daftarSkema, faqSkema]}>
+  <section class="harga-head">
+    <div class="wrap wrap--sempit">
+      <nav class="crumbs" aria-label="Remah">
+        <a href="/">Beranda</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Daftar Harga</span>
+      </nav>
+      <p class="harga-eyebrow">Harga OTR {kota}</p>
+      <h1 class="harga-judul">Daftar Harga OMODA &amp; JAECOO</h1>
+      <p class="harga-lede">
+        Harga on the road {kota}: sudah termasuk BBN, STNK, dan pelat nomor.
+        Dibantu {site.salesName} untuk simulasi kredit dan tukar tambah.
+      </p>
+    </div>
+  </section>
+
+  <section class="harga-isi">
+    <div class="wrap wrap--sempit">
+      <div class="tabel-bungkus">
+        <table class="tabel-harga">
+          <thead>
+            <tr>
+              <th scope="col">Model</th>
+              <th scope="col">Kategori</th>
+              <th scope="col">Harga OTR</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cars.map((c) => (
+              <tr>
+                <th scope="row">
+                  <a href={`/mobil/${c.slug}`}>{c.nama}</a>
+                  <span class="tabel-merek">{merek(c)}</span>
+                </th>
+                <td>{c.kategori}</td>
+                <td class="tabel-angka">
+                  {punyaHarga(c)
+                    ? teksHarga(c)
+                    : <span class="tabel-prebook">{labelStatus(c)}</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="harga-catatan">
+        Harga dapat berubah sewaktu-waktu mengikuti ketetapan pabrikan.
+        {preBook.length > 0 && (
+          <> Model yang masih pre-book belum memiliki harga resmi; pemesan awal
+          mendapat kabar lebih dulu begitu harganya keluar.</>
+        )}
+      </p>
+
+      <h2>Pertanyaan seputar harga</h2>
+      {tanya.map(([q, a]) => (
+        <details class="faq">
+          <summary>{q}</summary>
+          <p>{a}</p>
+        </details>
+      ))}
+
+      <div class="harga-cta">
+        <a class="btn btn--dark" href={waLink(pesanPenawaran())} target="_blank" rel="noopener">
+          Tanya harga &amp; simulasi kredit
+        </a>
+        <a class="btn btn--ghost" href="/#lineup">Lihat semua model</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .harga-head { padding: 112px 0 28px; background: var(--mist); }
+  .crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #7c7676; margin-bottom: 18px; }
+  .crumbs a { color: #7c7676; }
+  .crumbs a:hover { color: var(--ink); }
+
+  .harga-eyebrow {
+    font-family: var(--display); font-weight: 600; font-size: 12px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
+  }
+  .harga-judul {
+    margin-top: 8px;
+    font-family: var(--display); font-weight: 700;
+    font-size: clamp(28px, 6.5vw, 44px); letter-spacing: .02em; line-height: 1.1;
+  }
+  .harga-lede { margin-top: 12px; font-size: 17px; color: #4a4a4a; line-height: 1.6; }
+
+  .harga-isi { padding: 36px 0 72px; }
+
+  /* Tabel adalah satu-satunya hal yang boleh lebih lebar dari layar, dan
+     hanya di dalam wadahnya sendiri — badan halaman tetap tidak menggulir. */
+  .tabel-bungkus { overflow-x: auto; }
+  .tabel-harga { width: 100%; border-collapse: collapse; min-width: 30rem; }
+  .tabel-harga th, .tabel-harga td {
+    text-align: left; padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line);
+    vertical-align: baseline;
+  }
+  .tabel-harga thead th {
+    font-family: var(--display); font-size: 12px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; color: #7c7676;
+  }
+  .tabel-harga tbody th a { font-family: var(--display); font-weight: 700; font-size: 16px; color: inherit; }
+  .tabel-harga tbody th a:hover { color: var(--accent); }
+  .tabel-merek {
+    display: block; margin-top: 2px; font-size: 11px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .tabel-harga td { font-size: 14px; color: #5e5e5e; }
+  .tabel-angka { font-family: var(--display); font-weight: 700; font-size: 16px; color: var(--ink); white-space: nowrap; }
+  .tabel-prebook { font-family: var(--body); font-weight: 600; font-size: 13px; color: var(--accent); }
+
+  .harga-catatan { margin-top: 14px; font-size: 13px; color: #7c7676; line-height: 1.6; }
+
+  .harga-isi h2 {
+    margin-top: 40px; margin-bottom: 10px;
+    font-family: var(--display); font-weight: 700; font-size: 21px; letter-spacing: .02em;
+  }
+  .harga-cta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+  @media (min-width: 48rem) {
+    .harga-head { padding-top: 140px; }
+  }
+</style>
