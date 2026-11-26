@@ -99,14 +99,19 @@ const skema = {
           <a href={waLink(pesanPreOrder(utama.namaPendek))} target="_blank" rel="noopener">Tanya Benefit</a>
         </article>
 
+        {/* Komentar Astro, bukan HTML: komentar HTML ikut terkirim ke browser.
+            Kartu ini sempat mengiklankan pameran yang sudah usai berbulan-bulan
+            karena tanggalnya ditulis mati di sini dan tidak ada yang mencabutnya.
+            Sekarang menunjuk pameran yang sedang berjalan, dan rinciannya ada di
+            halaman tersendiri supaya cukup satu tempat yang perlu diperbarui. */}
         <article class="card">
           <div class="card__media">
-            <img src="/banner-utama.jpeg" alt="Pre-book OMODA 04 EV di GIIAS 2026, 30 Juli sampai 9 Agustus 2026 di ICE BSD City."
-                 loading="lazy" decoding="async" />
+            <img src="/gaw-2026-semarang.webp" alt="Poster GAIKINDO Auto Week 2026 OMODA JAECOO Sun Semarang di 23 Mall Semarang, 25 sampai 29 November 2026."
+                 width="1000" height="1415" loading="lazy" decoding="async" />
           </div>
-          <h3>Pre-Book di GIIAS 2026</h3>
-          <p>Berlangsung 30 Juli&ndash;9 Agustus 2026 di ICE BSD City. Pemesanan JAECOO J5 selama event dapat free body kit.</p>
-          <a href={waLink('Halo, saya mau ikut pre-book OMODA 04 EV di GIIAS 2026. Boleh dibantu prosesnya dari Semarang?')} target="_blank" rel="noopener">Tanya Pre-Book</a>
+          <h3>GAIKINDO Auto Week 2026</h3>
+          <p>23 Mall Semarang, 25&ndash;29 November 2026. Harga resmi OMODA 04 EV diumumkan di pameran ini, dan ada bonus senilai sekitar Rp 32 juta.</p>
+          <a href="/gaikindo-auto-week">Lihat Jadwal &amp; Bonus</a>
         </article>
 
         <article class="card">

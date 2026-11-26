@@ -37,19 +37,19 @@
   },
   "promoPopup": {
     "aktif": true,
-    "gambar": "/banner-andre.jpeg",
-    "lebar": 1024,
-    "tinggi": 1536,
-    "alt": "Pre-booking OMODA 04 EV bersama Andre di OMODA JAECOO Sun Semarang. Hubungi 0851-5511-7519.",
-    "ctaLabel": "Ambil Benefit Pre-Order",
-    "ctaPesan": "Halo, saya mau ikut pre-order OMODA 04 EV dan masuk kuota 1.000 pertama. Boleh dibantu prosesnya?"
+    "gambar": "/gaw-2026-semarang.webp",
+    "lebar": 1000,
+    "tinggi": 1415,
+    "alt": "Poster GAIKINDO Auto Week 2026 OMODA JAECOO Sun Semarang. 23 Mall Semarang, 25-29 November 2026. Bonus: free body kit J5 EV Premium senilai 20 juta, free physical button 2 juta, harga khusus wall charge 3in1, dan free subwoofer 3 juta.",
+    "ctaLabel": "Tanya Promo GAW",
+    "ctaPesan": "Halo, saya mau tanya promo GAIKINDO Auto Week 2026 di 23 Mall Semarang. Boleh dibantu infonya?"
   },
   "floatingPromo": {
     "aktif": true,
-    "gambar": "/banner-utama.jpeg",
-    "alt": "Pre-book OMODA 04 EV di GIIAS 2026.",
-    "ctaLabel": "Pre-Order Sekarang",
-    "ctaPesan": "Halo, saya mau pre-order OMODA 04 EV sekarang."
+    "gambar": "/gaw-2026-semarang.webp",
+    "alt": "Poster GAIKINDO Auto Week 2026 OMODA JAECOO Sun Semarang. 23 Mall Semarang, 25-29 November 2026. Bonus: free body kit J5 EV Premium senilai 20 juta, free physical button 2 juta, harga khusus wall charge 3in1, dan free subwoofer 3 juta.",
+    "ctaLabel": "Promo GAW 2026",
+    "ctaPesan": "Halo, saya mau tanya promo GAIKINDO Auto Week 2026 di 23 Mall Semarang. Boleh dibantu infonya?"
   },
   "areaLayanan": [
     {
